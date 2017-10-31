@@ -1,0 +1,19 @@
+extends layout
+
+block contenutoNav
+    li
+        a(href='/user')
+            i.pe-7s-user
+            p Inserisci Paziente
+    li
+        a(href='/dati')
+            i.pe-7s-graph
+            p Visualizza Dati
+    li.active
+        a(href='/database')
+            i.pe-7s-note2
+            p Esporta Database
+
+.div
+    block contenuto
+        h1 Benvenuto database

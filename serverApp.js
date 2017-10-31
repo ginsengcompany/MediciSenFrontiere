@@ -12,6 +12,9 @@ var now = require('moment');
 var postgres = require("./config/postgres");
 
 var routes = require('./routes/index');
+var user = require('./routes/user');
+var dati = require('./routes/dati');
+var database = require('./routes/database');
 
 var app = express();
 
@@ -41,6 +44,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use('/', routes);
+app.use('/user', user);
+app.use('/dati', dati);
+app.use('/database', database);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
