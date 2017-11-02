@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+  <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/master/build/js/bootstrap-datetimepicker.min.js"></script>
+
+  <script type="text/javascript">
+  	function bs_input_file() {
+	$(".input-file").before(
+		function() {
+			if ( ! $(this).prev().hasClass('input-ghost') ) {
+				var element = $("<input type='file' class='input-ghost' style='visibility:hidden; height:0'>");
+				element.attr("name",$(this).attr("name"));
+				element.change(function(){
+					element.next(element).find('input').val((element.val()).split('\\').pop());
+				});
+				$(this).find("button.btn-choose").click(function(){
+					element.click();
+				});
+				$(this).find("button.btn-reset").click(function(){
+					element.val(null);
+					$(this).parents(".input-file").find('input').val('');
+				});
+				$(this).find('input').css("cursor","pointer");
+				$(this).find('input').mousedown(function() {
+					$(this).parents('.input-file').prev().click();
+					return false;
+				});
+				return element;
+			}
+		}
+	);
+}
+$(function() {
+	bs_input_file();
+});
+  </script>
+
+<script type="text/javascript">
+$(function() {
+	$('#datetimepicker1').datetimepicker();
+	$('#datetimepicker2').datetimepicker();
+	$('#inizioRicovero').datetimepicker();
+	$('#fineRicovero').datetimepicker();
+	$('#datetimepickerDataIntervento').datetimepicker();
+});
+    
+</script>
+
+<script>
+      //--------------------                    
+      // GET USER MEDIA CODE
+      //--------------------
+          navigator.getUserMedia = ( navigator.getUserMedia ||
+                             navigator.webkitGetUserMedia ||
+                             navigator.mozGetUserMedia ||
+                             navigator.msGetUserMedia);
+
+      var video;
+      var webcamStream;
+
+      function startWebcam() {
+        if (navigator.getUserMedia) {
+           navigator.getUserMedia (
+
+              // constraints
+              {
+                 video: true,
+                 audio: false
+              },
+
+              // successCallback
+              function(localMediaStream) {
+                 video = document.querySelector('video');
+                 video.src = window.URL.createObjectURL(localMediaStream);
+                 webcamStream = localMediaStream;
+              },
+
+              // errorCallback
+              function(err) {
+                 console.log("The following error occured: " + err);
+              }
+           );
+        } else {
+           console.log("getUserMedia not supported");
+        }  
+      }
+
+      function stopWebcam() {
+          webcamStream.stop();
+      }
+      //---------------------
+      // TAKE A SNAPSHOT CODE
+      //---------------------
+      var canvas, ctx;
+
+      function init() {
+        // Get the canvas and obtain a context for
+        // drawing in it
+        canvas = document.getElementById("myCanvas");
+        ctx = canvas.getContext('2d');
+      }
+
+      function snapshot() {
+         // Draws current image from the video element into the canvas
+        ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+      }
+  </script>
+
+
+</head>
+
+<body onload="init();">
+
+<div class="container">
+    <h1 class="well">Surgey Registration Form</h1>
+	<div class="row">
+		<form>
+			<div class="col-sm-12">
+				<!-- Surgey for children St. Mary Hospital Lacor -->
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="surgeyChildren" class="cols-sm-2 control-label">Surgey for children</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-hospital-o fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Surgey for children" class="form-control" id="surgeyChildren">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6 form-group">
+						<label for="stMaryHospital" class="cols-sm-2 control-label">St. Mary Hospital Lacor</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-map-marker fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="St. Mary Hospital Lacor" class="form-control" id="stMaryHospital">
+							</div>
+						</div>
+					</div>
+				</div>	
+
+
+				<!-- Cartella Clinica e Numero Cartella -->
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="cartellaClinica" class="cols-sm-2 control-label">Cartella Clinica</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-folder-open-o fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Cartella Clinica" class="form-control" id="cartellaClinica">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6 form-group">
+						<label for="numeroCartella" class="cols-sm-2 control-label">Numero</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-sitemap fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Numero" class="form-control" id="numeroCartella">
+							</div>
+						</div>
+					</div>
+				</div>		
+
+				<!-- Carica immagini da pc -->
+				<div class="row">
+					<div class="col-md-6">
+						<form method="POST" action="#" enctype="multipart/form-data">
+							<div class="form-group">
+							<label for="caricaFoto" class="cols-sm-2 control-label">Carica Immagine da PC</label>
+								<div class="input-group input-file" name="Fichier1">
+								<span class="input-group-addon"><i class="fa fa-file-image-o fa" aria-hidden="true"></i></span>
+									<span class="input-group-btn">
+										<button class="btn btn-default btn-choose" type="button">Seleziona</button>
+									</span>
+									<input type="text" class="form-control" id="caricaFoto" accept="image/*" placeholder='Carica immagini da PC...' />
+									<span class="input-group-btn">
+			 								<button class="btn btn-warning btn-reset" type="button">Reset</button>
+									</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary pull-right" disabled>Submit</button>
+								<button type="reset" class="btn btn-danger">Reset</button>
+							</div>
+						</form>
+					</div>
+
+					<div class="col-sm-6 form-group">
+						<label for="scattaFoto" class="cols-sm-2 control-label">Scatta Foto</label>
+						<div class="cols-sm-10">
+							<a href="#" target="_blank" type="button" id="scattaFoto" class="btn btn-primary">Scatta da Camera</a>
+						</div>
+					</div>
+				</div>
+
+				<h2 class="well">Dati paziente:</h2>
+				<!-- Cartella Nome Cognome -->
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="nome" class="cols-sm-2 control-label">Nome</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Nome" class="form-control" id="nome">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-6 form-group">
+						<label for="cognome" class="cols-sm-2 control-label">Cognome</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Cognome" class="form-control" id="cognome">
+							</div>
+						</div>
+					</div>
+				</div>	
+
+				<!-- Anni Sesso Peso -->
+				<div class="row">
+					<div class="col-sm-4 form-group">
+						<label for="nome" class="cols-sm-2 control-label">Anni</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-calendar fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Anni" class="form-control" id="nome">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4 form-group">
+						<label for="cognome" class="cols-sm-2 control-label">Sesso</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-venus-mars fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Sesso" class="form-control" id="cognome">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4 form-group">
+						<label for="cognome" class="cols-sm-2 control-label">Peso</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-balance-scale fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Peso" class="form-control" id="cognome">
+							</div>
+						</div>
+					</div>
+				</div>	
+
+				<!-- Villaggio Distretto Contea -->
+				<div class="row">
+					<div class="col-sm-4 form-group">
+						<label for="villaggio" class="cols-sm-2 control-label">Villaggio</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-map-marker fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Villaggio" class="form-control" id="villaggio">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4 form-group">
+						<label for="distretto" class="cols-sm-2 control-label">Distretto</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-map-marker fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Distretto" class="form-control" id="distretto">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4 form-group">
+						<label for="contea" class="cols-sm-2 control-label">Contea</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-map-marker fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Contea" class="form-control" id="contea">
+							</div>
+						</div>
+					</div>
+				</div>	
+
+				<!-- Madre Padre Telefono -->
+				<div class="row">
+					<div class="col-sm-4 form-group">
+						<label for="madre" class="cols-sm-2 control-label">Madre</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-female fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Madre" class="form-control" id="madre">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4 form-group">
+						<label for="padre" class="cols-sm-2 control-label">Padre</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-male fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Padre" class="form-control" id="padre">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-sm-4 form-group">
+						<label for="telefono" class="cols-sm-2 control-label">Telefono</label>
+                        <div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+								<input type="text" placeholder="Telefono" class="form-control" id="telefono">
+							</div>
+						</div>
+					</div>
+				</div>	
+
+				<!-- Malaria e periodo -->
+				<div class="row">
+					<div class="col-sm-4 form-group">
+						<label for="malaria">Malaria:</label>
+						<div class="cols-sm-10">
+							<select class="form-control" id="sel1">
+								<option>Si</option>
+								<option>No</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-sm-4 form-group">
+					<label for="inizio" class="cols-sm-2 control-label">Dal giorno:</label>
+						<div class="input-group date" id="datetimepicker1">
+        					<input type="text" class="form-control" id="inizio" />	
+        						<span class="input-group-addon">
+        							<span class="glyphicon-calendar glyphicon"></span>
+        						</span>
+    					</div>
+					</div>
+
+					<div class="col-sm-4 form-group">
+					<label for="fine" class="cols-sm-2 control-label">Al giorno:</label>
+						<div class="input-group date" id="datetimepicker2">
+        					<input type="text" class="form-control" id="fine"/>	
+        						<span class="input-group-addon">
+        							<span class="glyphicon-calendar glyphicon"></span>
+        						</span>
+    					</div>
+					</div>
+				</div>
+
+				<h2 class="well">Informazioni cliniche:</h2>
+				<!-- Data ricovero e dimissione -->
+				<div class="row">
+
+					<div class="col-sm-6 form-group">
+					<label for="inizioRicovero" class="cols-sm-2 control-label">Data di ricovero:</label>
+						<div class="input-group date" id="datetimepickerInizioRicovero">
+        					<input type="text" class="form-control" id="inizioRicovero" />	
+        						<span class="input-group-addon">
+        							<span class="glyphicon-calendar glyphicon"></span>
+        						</span>
+    					</div>
+					</div>
+
+					<div class="col-sm-6 form-group">
+					<label for="fineRicovero" class="cols-sm-2 control-label">Data di dimissione:</label>
+						<div class="input-group date" id="datetimepickerFineRicovero">
+        					<input type="text" class="form-control" id="fineRicovero"/>	
+        						<span class="input-group-addon">
+        							<span class="glyphicon-calendar glyphicon"></span>
+        						</span>
+    					</div>
+					</div>
+				</div>
+
+				<!-- Diagnosi Anamnesi -->
+				<div class="row">
+				    <div class="col-sm-6 form-group">
+				    	<label for="diagnosi" class="cols-sm-2 control-label">Diagnosi (max 500 caratteri):</label>
+				    		<textarea class="form-control" rows="1" id="diagnosi" maxlength="500"></textarea>
+					</div>
+
+				    <div class="col-sm-6 form-group">
+				    	<label for="anamnesi" class="cols-sm-2 control-label">Anamnesi (max 500 caratteri):</label>
+				    		<textarea class="form-control" rows="1" id="anamnesi" maxlength="500"></textarea>
+					</div>
+				</div>
+
+				<!-- Consulenza chirurgica ed anestesiologica -->
+				<div class="row">
+				    <div class="col-sm-6 form-group">
+				    	<label for="consulenzaChirurgica" class="cols-sm-2 control-label">Consulenza chirurgica (max 500 caratteri):</label>
+				    		<textarea class="form-control" rows="1" id="consulenzaChirurgica" maxlength="500"></textarea>
+					</div>
+
+				    <div class="col-sm-6 form-group">
+				    	<label for="consulenzaAnestesiologica" class="cols-sm-2 control-label">Consulenza anestesiologica (max 500 caratteri):</label>
+				    		<textarea class="form-control" rows="1" id="consulenzaAnestesiologica" maxlength="500"></textarea>
+					</div>
+				</div>
+
+				<h2 class="well">Intervento:</h2>
+				<!-- Intervendo e descrizione -->
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="dataIntervento" class="cols-sm-2 control-label">Data intervento:</label>
+						<div class="input-group date" id="datetimepickerDataIntervento">
+        					<input type="text" class="form-control" id="dataIntervento"/>	
+        						<span class="input-group-addon">
+        							<span class="glyphicon-calendar glyphicon"></span>
+        						</span>
+    						</div>
+					</div>
+
+				    <div class="col-sm-6 form-group">
+				    	<label for="descrizioneIntervento" class="cols-sm-2 control-label">Descrizione intervento (max 500 caratteri):</label>
+				    		<textarea class="form-control" rows="1" id="descrizioneIntervento" maxlength="500"></textarea>
+					</div>
+				</div>
+
+				<!-- Foto -->
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="avviaCam" class="cols-sm-2 control-label">Scatta Foto</label>
+						<div class="cols-sm-10">
+							<a onclick="startWebcam();" type="button" class="btn btn-primary" href="#" id="avviaCam">Start WebCam</a>
+						   	<a onclick="stopWebcam();" type="button" class="btn btn-danger" href="#" id="arrestaCam">Stop WebCam</a> 
+						   	<a onclick="snapshot();" type="button" class="btn btn-success" href="#" id="catturaFoto">Cattura Immagine</a> 
+						</div>
+					</div>
+
+					<div class="col-sm-6 form-group">
+						<label for="myCanvas" class="cols-sm-2 control-label">Scatto catturato</label>
+						<div class="cols-sm-10">
+							<canvas id="myCanvas" width="210" height="150"></canvas>  
+							<video  onclick="snapshot(this);" width=70 height=70 id="video" controls autoplay></video>
+						</div>
+					</div>
+				</div>
+
+				<!-- Foglio diario clinico e complicanze -->
+				<div class="row">
+					<div class="col-sm-6 form-group">
+					    <label for="foglioDiarioClinico" class="cols-sm-2 control-label">Foglio Diario Clinico (max 500 caratteri):</label>
+					    <textarea class="form-control" rows="1" id="foglioDiarioClinico" maxlength="500"></textarea>
+					</div>
+
+				    <div class="col-sm-6 form-group">
+				    	<label for="complicanze" class="cols-sm-2 control-label">Complicanze (max 500 caratteri):</label>
+				    		<textarea class="form-control" rows="1" id="complicanze" maxlength="500"></textarea>
+					</div>
+				</div>
+
+				<h2 class="well">Indagini strumentali e follow up:</h2>
+				<!-- Indagini radiografiche ecografiche ed ematochimihce -->
+				<div class="row">
+					<div class="col-sm-4 form-group">
+					    <label for="indaginiRadiografiche" class="cols-sm-2 control-label">Indagini radiografiche (max 500 caratteri):</label>
+					    <textarea class="form-control" rows="1" id="indaginiRadiografiche" maxlength="500"></textarea>
+					</div>
+
+				    <div class="col-sm-4 form-group">
+				    	<label for="indaginiEcografiche" class="cols-sm-2 control-label">Indagini ecografiche (max 500 caratteri):</label>
+				    		<textarea class="form-control" rows="1" id="indaginiEcografiche" maxlength="500"></textarea>
+					</div>
+
+				    <div class="col-sm-4 form-group">
+				    	<label for="indaginiEmatochimiche" class="cols-sm-2 control-label">Indagini ematochimiche (max 500 caratteri):</label>
+				    		<textarea class="form-control" rows="1" id="indaginiEmatochimiche" maxlength="500"></textarea>
+					</div>
+				</div>
+
+				<!-- Indagini radiografiche ecografiche ed ematochimihce -->
+				<div class="row">
+					<div class="col-sm-4 form-group">
+					    <label for="followUp" class="cols-sm-2 control-label">Follow Up (max 500 caratteri):</label>
+					    <textarea class="form-control" rows="1" id="followUp" maxlength="500"></textarea>
+					</div>
+
+				    <div class="col-sm-4 form-group">
+				    	<label for="anniPrecedenti" class="cols-sm-2 control-label">Anni precedenti (max 500 caratteri):</label>
+				    	<textarea class="form-control" rows="1" id="anniPrecedenti" maxlength="500"></textarea>
+					</div>
+				</div>
+
+			</div>
+		</form> 
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('a#avviaCam,a#arrestaCam,a#catturaFoto').click(function(e) {
+        e.preventDefault();
+        return false;
+    });
+});
+</script>
+
+</body>
+</html>
