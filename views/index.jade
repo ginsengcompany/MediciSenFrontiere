@@ -92,7 +92,7 @@ html(lang='it')
                                             a(href='#') Separated link
                 .content
                     .container-fluid
-                        h1 Benvenuto
+                        block contenuto
                 footer.footer
                     .container-fluid
                         nav.pull-left
@@ -107,6 +107,7 @@ html(lang='it')
     script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?sensor=false')
     script(src='assets/js/light-bootstrap-dashboard.js')
     script(src='assets/js/demo.js')
+    block myScript
     script(type='text/javascript').
         $(document).ready(function(){
             demo.initChartist();

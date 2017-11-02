@@ -1,4 +1,4 @@
-extends layout
+extends index
 
 block contenutoNav
     li.active
@@ -16,4 +16,253 @@ block contenutoNav
 
 .div
     block contenuto
-        h1 Benvenuto user
+        .container
+            h1.well Surgey Registration Form
+            .row
+                form
+                    .col-sm-12
+                        // Surgey for children St. Mary Hospital Lacor
+                        .row
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='surgeyChildren') Surgey for children
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-hospital-o.fa(aria-hidden='true')
+                                        input#surgeyChildren.form-control(type='text', placeholder='Surgey for children')
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='stMaryHospital') St. Mary Hospital Lacor
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-map-marker.fa(aria-hidden='true')
+                                        input#stMaryHospital.form-control(type='text', placeholder='St. Mary Hospital Lacor')
+                        // Cartella Clinica e Numero Cartella
+                        .row
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='cartellaClinica') Cartella Clinica
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-folder-open-o.fa(aria-hidden='true')
+                                        input#cartellaClinica.form-control(type='text', placeholder='Cartella Clinica')
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='numeroCartella') Numero
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-sitemap.fa(aria-hidden='true')
+                                        input#numeroCartella.form-control(type='text', placeholder='Numero')
+                        // Carica immagini da pc
+                        .row
+                            .col-md-6
+                                form(method='POST', action='#', enctype='multipart/form-data')
+                                    .form-group
+                                        label.cols-sm-2.control-label(for='caricaFoto') Carica Immagine da PC
+                                        .input-group.input-file(name='Fichier1')
+                                            span.input-group-addon
+                                                i.fa.fa-file-image-o.fa(aria-hidden='true')
+                                            span.input-group-btn
+                                                button.btn.btn-default.btn-choose(type='button') Seleziona
+                                            input#caricaFoto.form-control(type='text', accept='image/*', placeholder='Carica immagini da PC...')
+                                            span.input-group-btn
+                                                button.btn.btn-warning.btn-reset(type='button') Reset
+                                    .form-group
+                                        button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
+                                        button.btn.btn-danger(type='reset') Reset
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='scattaFoto') Scatta Foto
+                                .cols-sm-10
+                                    a#scattaFoto.btn.btn-primary(href='#', target='_blank', type='button') Scatta da Camera
+                        h2.well Dati paziente:
+                        // Cartella Nome Cognome
+                        .row
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='nome') Nome
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-user.fa(aria-hidden='true')
+                                        input#nome.form-control(type='text', placeholder='Nome')
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='cognome') Cognome
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-user.fa(aria-hidden='true')
+                                        input#cognome.form-control(type='text', placeholder='Cognome')
+                        // Anni Sesso Peso
+                        .row
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='nome') Anni
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-calendar.fa(aria-hidden='true')
+                                        input#anni.form-control(type='text', placeholder='Anni')
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='cognome') Sesso
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-venus-mars.fa(aria-hidden='true')
+                                        input#sesso.form-control(type='text', placeholder='Sesso')
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='cognome') Peso
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-balance-scale.fa(aria-hidden='true')
+                                        input#peso.form-control(type='text', placeholder='Peso')
+                        // Villaggio Distretto Contea
+                        .row
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='villaggio') Villaggio
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-map-marker.fa(aria-hidden='true')
+                                        input#villaggio.form-control(type='text', placeholder='Villaggio')
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='distretto') Distretto
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-map-marker.fa(aria-hidden='true')
+                                        input#distretto.form-control(type='text', placeholder='Distretto')
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='contea') Contea
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-map-marker.fa(aria-hidden='true')
+                                        input#contea.form-control(type='text', placeholder='Contea')
+                        // Madre Padre Telefono
+                        .row
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='madre') Madre
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-female.fa(aria-hidden='true')
+                                        input#madre.form-control(type='text', placeholder='Madre')
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='padre') Padre
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-male.fa(aria-hidden='true')
+                                        input#padre.form-control(type='text', placeholder='Padre')
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='telefono') Telefono
+                                .cols-sm-10
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-phone.fa(aria-hidden='true')
+                                        input#telefono.form-control(type='text', placeholder='Telefono')
+                        // Malaria e periodo
+                        .row
+                            .col-sm-4.form-group
+                                label(for='malaria') Malaria:
+                                .cols-sm-10
+                                    select#malaria.form-control
+                                        option Si
+                                        option No
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='inizio') Dal giorno:
+                                #datetimepicker1.input-group.date
+                                    input#inizio.form-control(type='text')
+                                    span.input-group-addon
+                                        span.glyphicon-calendar.glyphicon
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='fine') Al giorno:
+                                #datetimepicker2.input-group.date
+                                    input#fine.form-control(type='text')
+                                    span.input-group-addon
+                                        span.glyphicon-calendar.glyphicon
+                        h2.well Informazioni cliniche:
+                        // Data ricovero e dimissione
+                        .row
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='inizioRicovero') Data di ricovero:
+                                #datetimepickerInizioRicovero.input-group.date
+                                    input#inizioRicovero.form-control(type='text')
+                                    span.input-group-addon
+                                        span.glyphicon-calendar.glyphicon
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='fineRicovero') Data di dimissione:
+                                #datetimepickerFineRicovero.input-group.date
+                                    input#fineRicovero.form-control(type='text')
+                                    span.input-group-addon
+                                        span.glyphicon-calendar.glyphicon
+                        // Diagnosi Anamnesi
+                        .row
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='diagnosi') Diagnosi (max 500 caratteri):
+                                textarea#diagnosi.form-control(rows='1', maxlength='500')
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='anamnesi') Anamnesi (max 500 caratteri):
+                                textarea#anamnesi.form-control(rows='1', maxlength='500')
+                        // Consulenza chirurgica ed anestesiologica
+                        .row
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='consulenzaChirurgica') Consulenza chirurgica (max 500 caratteri):
+                                textarea#consulenzaChirurgica.form-control(rows='1', maxlength='500')
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='consulenzaAnestesiologica') Consulenza anestesiologica (max 500 caratteri):
+                                textarea#consulenzaAnestesiologica.form-control(rows='1', maxlength='500')
+                        h2.well Intervento:
+                        // Intervendo e descrizione
+                        .row
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='dataIntervento') Data intervento:
+                                #datetimepickerDataIntervento.input-group.date
+                                    input#dataIntervento.form-control(type='text')
+                                    span.input-group-addon
+                                        span.glyphicon-calendar.glyphicon
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='descrizioneIntervento') Descrizione intervento (max 500 caratteri):
+                                textarea#descrizioneIntervento.form-control(rows='1', maxlength='500')
+                        // Foto
+                        .row
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='avviaCam') Scatta Foto
+                                .cols-sm-10
+                                    a#avviaCam.btn.btn-primary(onclick='startWebcam();', type='button', href='#') Start WebCam
+                                    a#arrestaCam.btn.btn-danger(onclick='stopWebcam();', type='button', href='#') Stop WebCam
+                                    a#catturaFoto.btn.btn-success(onclick='snapshot();', type='button', href='#') Cattura Immagine
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='myCanvas') Scatto catturato
+                                .cols-sm-10
+                                    canvas#myCanvas(width='210', height='150')
+                                    video#video(onclick='snapshot(this);', width='70', height='70', controls='', autoplay='')
+                        // Foglio diario clinico e complicanze
+                        .row
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='foglioDiarioClinico') Foglio Diario Clinico (max 500 caratteri):
+                                textarea#foglioDiarioClinico.form-control(rows='1', maxlength='500')
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='complicanze') Complicanze (max 500 caratteri):
+                                textarea#complicanze.form-control(rows='1', maxlength='500')
+                        h2.well Indagini strumentali e follow up:
+                        // Indagini radiografiche ecografiche ed ematochimihce
+                        .row
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='indaginiRadiografiche') Indagini radiografiche (max 500 caratteri):
+                                textarea#indaginiRadiografiche.form-control(rows='1', maxlength='500')
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='indaginiEcografiche') Indagini ecografiche (max 500 caratteri):
+                                textarea#indaginiEcografiche.form-control(rows='1', maxlength='500')
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='indaginiEmatochimiche') Indagini ematochimiche (max 500 caratteri):
+                                textarea#indaginiEmatochimiche.form-control(rows='1', maxlength='500')
+                        // Indagini radiografiche ecografiche ed ematochimihce
+                        .row
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='followUp') Follow Up (max 500 caratteri):
+                                textarea#followUp.form-control(rows='1', maxlength='500')
+                            .col-sm-4.form-group
+                                label.cols-sm-2.control-label(for='anniPrecedenti') Anni precedenti (max 500 caratteri):
+                                textarea#anniPrecedenti.form-control(rows='1', maxlength='500')
+block myScript
+    script(src="assets/js/userController.js")
