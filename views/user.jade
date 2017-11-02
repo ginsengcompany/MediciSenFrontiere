@@ -16,11 +16,9 @@ block contenutoNav
 
 .div
     block contenuto
-        .container
-            h1.well Surgey Registration Form
-            .row
-                form
-                    .col-sm-12
+        .container-fluid
+
+                        h1.well Surgey Registration Form
                         // Surgey for children St. Mary Hospital Lacor
                         .row
                             .col-sm-6.form-group
@@ -67,10 +65,7 @@ block contenutoNav
                                             input#caricaFoto.form-control(type='text', accept='image/*', placeholder='Carica immagini da PC...')
                                             span.input-group-btn
                                                 button.btn.btn-warning.btn-reset(type='button') Reset
-                                    .form-group
-                                        button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
-                                        button.btn.btn-danger(type='reset') Reset
-                            .col-sm-6.form-group
+                            .col-sm-5.form-group
                                 label.cols-sm-2.control-label(for='scattaFoto') Scatta Foto
                                 .cols-sm-10
                                     a#scattaFoto.btn.btn-primary(href='#', target='_blank', type='button') Scatta da Camera
@@ -227,21 +222,25 @@ block contenutoNav
                         .row
                             .col-sm-6.form-group
                                 label.cols-sm-2.control-label(for='avviaCam') Scatta Foto
+                                br
+                                br
+                                br
                                 .cols-sm-10
                                     a#avviaCam.btn.btn-primary(onclick='startWebcam();', type='button', href='#') Start WebCam
                                     a#arrestaCam.btn.btn-danger(onclick='stopWebcam();', type='button', href='#') Stop WebCam
                                     a#catturaFoto.btn.btn-success(onclick='snapshot();', type='button', href='#') Cattura Immagine
+                                .col-sm-10
+                                    video#video(onclick='snapshot(this);', width='350', height='350', controls='', autoplay='')
                             .col-sm-6.form-group
                                 label.cols-sm-2.control-label(for='myCanvas') Scatto catturato
                                 .cols-sm-10
-                                    canvas#myCanvas(width='210', height='150')
-                                    video#video(onclick='snapshot(this);', width='70', height='70', controls='', autoplay='')
+                                    canvas#myCanvas(width='350', height='250')
                         // Foglio diario clinico e complicanze
                         .row
-                            .col-sm-6.form-group
+                            .col-sm-5.form-group
                                 label.cols-sm-2.control-label(for='foglioDiarioClinico') Foglio Diario Clinico (max 500 caratteri):
                                 textarea#foglioDiarioClinico.form-control(rows='1', maxlength='500')
-                            .col-sm-6.form-group
+                            .col-sm-5.form-group
                                 label.cols-sm-2.control-label(for='complicanze') Complicanze (max 500 caratteri):
                                 textarea#complicanze.form-control(rows='1', maxlength='500')
                         h2.well Indagini strumentali e follow up:
@@ -264,5 +263,7 @@ block contenutoNav
                             .col-sm-4.form-group
                                 label.cols-sm-2.control-label(for='anniPrecedenti') Anni precedenti (max 500 caratteri):
                                 textarea#anniPrecedenti.form-control(rows='1', maxlength='500')
+        .form-group
+            button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
 block myScript
     script(src="assets/js/userController.js")
