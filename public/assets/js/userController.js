@@ -5,6 +5,7 @@ $(document).ready(function() {
         return false;
     });
 });
+
 $(".input-file").before(
     function() {
         if (!$(this).prev().hasClass('input-ghost')) {
@@ -29,9 +30,7 @@ $(".input-file").before(
         }
     }
 );
-$(function() {
-    bs_input_file();
-});
+
 $(function() {
     $('#datetimepicker1').datetimepicker();
     $('#datetimepicker2').datetimepicker();
@@ -39,6 +38,7 @@ $(function() {
     $('#fineRicovero').datetimepicker();
     $('#datetimepickerDataIntervento').datetimepicker();
 });
+
 navigator.getUserMedia = ( navigator.getUserMedia ||
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia ||
