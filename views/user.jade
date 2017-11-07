@@ -10,12 +10,16 @@ block contenutoNav
             i.pe-7s-info
             p Informazioni Cliniche
     li
+        a(href='/intervento')
+            i.pe-7s-note2
+            p Intervento
+    li
         a(href='/dati')
             i.pe-7s-graph
             p Visualizza Dati
     li
         a(href='/database')
-            i.pe-7s-note2
+            i.pe-7s-back-2
             p Esporta Database
 
 .div
@@ -179,75 +183,6 @@ block contenutoNav
                                     input#fine.form-control(type='text')
                                     span.input-group-addon
                                         span.glyphicon-calendar.glyphicon
-                        h2.well Informazioni cliniche:
-                        // Data ricovero e dimissione
-                        .row
-                            .col-sm-6.form-group
-                                label.cols-sm-2.control-label(for='inizioRicovero') Data di ricovero:
-                                #datetimepickerInizioRicovero.input-group.date
-                                    input#inizioRicovero.form-control(type='text')
-                                    span.input-group-addon
-                                        span.glyphicon-calendar.glyphicon
-                            .col-sm-6.form-group
-                                label.cols-sm-2.control-label(for='fineRicovero') Data di dimissione:
-                                #datetimepickerFineRicovero.input-group.date
-                                    input#fineRicovero.form-control(type='text')
-                                    span.input-group-addon
-                                        span.glyphicon-calendar.glyphicon
-                        // Diagnosi Anamnesi
-                        .row
-                            .col-sm-6.form-group
-                                label.cols-sm-2.control-label(for='diagnosi') Diagnosi (max 500 caratteri):
-                                textarea#diagnosi.form-control(rows='1', maxlength='500')
-                            .col-sm-6.form-group
-                                label.cols-sm-2.control-label(for='anamnesi') Anamnesi (max 500 caratteri):
-                                textarea#anamnesi.form-control(rows='1', maxlength='500')
-                        // Consulenza chirurgica ed anestesiologica
-                        .row
-                            .col-sm-6.form-group
-                                label.cols-sm-2.control-label(for='consulenzaChirurgica') Consulenza chirurgica (max 500 caratteri):
-                                textarea#consulenzaChirurgica.form-control(rows='1', maxlength='500')
-                            .col-sm-6.form-group
-                                label.cols-sm-2.control-label(for='consulenzaAnestesiologica') Consulenza anestesiologica (max 500 caratteri):
-                                textarea#consulenzaAnestesiologica.form-control(rows='1', maxlength='500')
-                        h2.well Intervento:
-                        // Intervendo e descrizione
-                        .row
-                            .col-sm-6.form-group
-                                label.cols-sm-2.control-label(for='dataIntervento') Data intervento:
-                                #datetimepickerDataIntervento.input-group.date
-                                    input#dataIntervento.form-control(type='text')
-                                    span.input-group-addon
-                                        span.glyphicon-calendar.glyphicon
-                            .col-sm-6.form-group
-                                label.cols-sm-2.control-label(for='descrizioneIntervento') Descrizione intervento (max 500 caratteri):
-                                textarea#descrizioneIntervento.form-control(rows='1', maxlength='500')
-                        // Foto
-                        .row
-                            .col-sm-6.form-group
-                                label.cols-sm-2.control-label(for='avviaCam') Scatta Foto
-                                br
-                                .col-sm-10
-                                    video#video(onclick='snapshot(this);', width='350', height='350', controls='', autoplay='')
-                                .cols-sm-10
-                                    a#avviaCam.btn.btn-primary(onclick='startWebcam();', type='button', href='#') Start WebCam
-                                    a#arrestaCam.btn.btn-danger(onclick='stopWebcam();', type='button', href='#') Stop WebCam
-                                    a#catturaFoto.btn.btn-success(onclick='snapshot();', type='button', href='#') Cattura Immagine
-                            .col-sm-6.form-group
-                                label.cols-sm-2.control-label(for='myCanvas') Scatto catturato
-                                br
-                                br
-                                br
-                                .cols-sm-10
-                                    canvas#myCanvas(width='350', height='250')
-                        // Foglio diario clinico e complicanze
-                        .row
-                            .col-sm-5.form-group
-                                label.cols-sm-2.control-label(for='foglioDiarioClinico') Foglio Diario Clinico (max 500 caratteri):
-                                textarea#foglioDiarioClinico.form-control(rows='1', maxlength='500')
-                            .col-sm-5.form-group
-                                label.cols-sm-2.control-label(for='complicanze') Complicanze (max 500 caratteri):
-                                textarea#complicanze.form-control(rows='1', maxlength='500')
                         h2.well Indagini strumentali e follow up:
                         // Indagini radiografiche ecografiche ed ematochimihce
                         .row
