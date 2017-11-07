@@ -14,6 +14,10 @@ block contenutoNav
             i.pe-7s-note2
             p Intervento
     li
+        a(href='/followup')
+            i.pe-7s-refresh
+            p Follow Up
+    li
         a(href='/dati')
             i.pe-7s-graph
             p Visualizza Dati
@@ -26,7 +30,7 @@ block contenutoNav
     block contenuto
         .container-fluid
 
-                        h1.well Surgey Registration Form
+                        h2.well Surgey Registration Form
                         // Surgey for children St. Mary Hospital Lacor
                         .row
                             .col-sm-6.form-group
@@ -183,27 +187,8 @@ block contenutoNav
                                     input#fine.form-control(type='text')
                                     span.input-group-addon
                                         span.glyphicon-calendar.glyphicon
-                        h2.well Indagini strumentali e follow up:
-                        // Indagini radiografiche ecografiche ed ematochimihce
-                        .row
-                            .col-sm-4.form-group
-                                label.cols-sm-2.control-label(for='indaginiRadiografiche') Indagini radiografiche (max 500 caratteri):
-                                textarea#indaginiRadiografiche.form-control(rows='1', maxlength='500')
-                            .col-sm-4.form-group
-                                label.cols-sm-2.control-label(for='indaginiEcografiche') Indagini ecografiche (max 500 caratteri):
-                                textarea#indaginiEcografiche.form-control(rows='1', maxlength='500')
-                            .col-sm-4.form-group
-                                label.cols-sm-2.control-label(for='indaginiEmatochimiche') Indagini ematochimiche (max 500 caratteri):
-                                textarea#indaginiEmatochimiche.form-control(rows='1', maxlength='500')
-                        // Indagini radiografiche ecografiche ed ematochimihce
-                        .row
-                            .col-sm-4.form-group
-                                label.cols-sm-2.control-label(for='followUp') Follow Up (max 500 caratteri):
-                                textarea#followUp.form-control(rows='1', maxlength='500')
-                            .col-sm-4.form-group
-                                label.cols-sm-2.control-label(for='anniPrecedenti') Anni precedenti (max 500 caratteri):
-                                textarea#anniPrecedenti.form-control(rows='1', maxlength='500')
-        .form-group
+        br
+        .container-fluid
             button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
 block myScript
     script(src="assets/js/userController.js")

@@ -35,6 +35,10 @@ html(lang='it')
                                   i.pe-7s-note2
                                   p Intervento
                           li
+                              a(href='/followup')
+                                  i.pe-7s-refresh
+                                  p Follow Up
+                          li
                               a(href='/dati')
                                   i.pe-7s-graph
                                   p Visualizza Dati
@@ -116,15 +120,6 @@ html(lang='it')
     script(src='assets/js/bootstrap-checkbox-radio-switch.js')
     script(src='assets/js/bootstrap-notify.js')
     block myScript
-    script(type='text/javascript').
-        $(document).ready(function(){
-            $.notify({
-                icon: 'pe-7s-gift',
-                message: "Benvenuto in  <b>Medici Senza Frontiere</b>"
-            },{
-                type: 'info',
-                timer: 4000
-            });
-        });
+        script(src="assets/js/indexController.js")
 
 

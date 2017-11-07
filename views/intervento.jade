@@ -14,6 +14,10 @@ block contenutoNav
             i.pe-7s-note2
             p Intervento
     li
+        a(href='/followup')
+            i.pe-7s-refresh
+            p Follow Up
+    li
         a(href='/dati')
             i.pe-7s-graph
             p Visualizza Dati
@@ -63,7 +67,9 @@ block contenutoNav
                     br
                     .cols-sm-10
                         canvas#myCanvas(width='350', height='250')
-
+        br
+        .container-fluid
+            button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
 
 block myScript
     script(src="assets/js/userController.js")

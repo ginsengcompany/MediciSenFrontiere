@@ -14,6 +14,10 @@ block contenutoNav
             i.pe-7s-note2
             p Intervento
     li
+        a(href='/followup')
+            i.pe-7s-refresh
+            p Follow Up
+    li
         a(href='/dati')
             i.pe-7s-graph
             p Visualizza Dati
@@ -56,6 +60,7 @@ block contenutoNav
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='consulenzaAnestesiologica') Consulenza anestesiologica (max 500 caratteri):
                     textarea#consulenzaAnestesiologica.form-control(rows='1', maxlength='500')
-        .form-group
+        br
+        .container-fluid
             button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
 block myScript

@@ -5,10 +5,18 @@ block contenutoNav
         a(href='/user')
             i.pe-7s-user
             p Inserisci Paziente
-    li.active
+    li
         a(href='/informazioni')
             i.pe-7s-info
             p Informazioni Cliniche
+    li
+        a(href='/intervento')
+            i.pe-7s-note2
+            p Intervento
+    li.active
+        a(href='/followup')
+            i.pe-7s-refresh
+            p Follow Up
     li
         a(href='/dati')
             i.pe-7s-graph
@@ -20,5 +28,28 @@ block contenutoNav
 
 .div
     block contenuto
-        h1 Benvenuto followup
+        .container-fluid
+            h2.well Indagini strumentali e follow up:
+            // Indagini radiografiche ecografiche ed ematochimihce
+            .row
+                .col-sm-4.form-group
+                    label.cols-sm-2.control-label(for='indaginiRadiografiche') Indagini radiografiche (max 500 caratteri):
+                    textarea#indaginiRadiografiche.form-control(rows='1', maxlength='500')
+                .col-sm-4.form-group
+                    label.cols-sm-2.control-label(for='indaginiEcografiche') Indagini ecografiche (max 500 caratteri):
+                    textarea#indaginiEcografiche.form-control(rows='1', maxlength='500')
+                .col-sm-4.form-group
+                    label.cols-sm-2.control-label(for='indaginiEmatochimiche') Indagini ematochimiche (max 500 caratteri):
+                    textarea#indaginiEmatochimiche.form-control(rows='1', maxlength='500')
+            // Indagini radiografiche ecografiche ed ematochimihce
+            .row
+                .col-sm-4.form-group
+                    label.cols-sm-2.control-label(for='followUp') Follow Up (max 500 caratteri):
+                    textarea#followUp.form-control(rows='1', maxlength='500')
+                .col-sm-4.form-group
+                    label.cols-sm-2.control-label(for='anniPrecedenti') Anni precedenti (max 500 caratteri):
+                    textarea#anniPrecedenti.form-control(rows='1', maxlength='500')
+        br
+        .container-fluid
+            button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
 block myScript
