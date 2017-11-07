@@ -1,4 +1,4 @@
-extend index
+extends index
 
 block contenutoNav
     li
@@ -10,15 +10,52 @@ block contenutoNav
             i.pe-7s-info
             p Informazioni Cliniche
     li
+        a(href='/intervento')
+            i.pe-7s-note2
+            p Intervento
+    li
         a(href='/dati')
             i.pe-7s-graph
             p Visualizza Dati
     li
         a(href='/database')
-            i.pe-7s-note2
+            i.pe-7s-back-2
             p Esporta Database
 
 .div
     block contenuto
-        h1 Benvenuto informazioni
+        .container-fluid
+            h2.well Informazioni cliniche:
+                // Data ricovero e dimissione
+            .row
+                .col-sm-6.form-group
+                    label.cols-sm-2.control-label(for='inizioRicovero') Data di ricovero:
+                    #datetimepickerInizioRicovero.input-group.date
+                        input#inizioRicovero.form-control(type='text')
+                        span.input-group-addon
+                            span.glyphicon-calendar.glyphicon
+                .col-sm-6.form-group
+                    label.cols-sm-2.control-label(for='fineRicovero') Data di dimissione:
+                    #datetimepickerFineRicovero.input-group.date
+                        input#fineRicovero.form-control(type='text')
+                        span.input-group-addon
+                            span.glyphicon-calendar.glyphicon
+            // Diagnosi Anamnesi
+            .row
+                .col-sm-6.form-group
+                    label.cols-sm-2.control-label(for='diagnosi') Diagnosi (max 500 caratteri):
+                    textarea#diagnosi.form-control(rows='1', maxlength='500')
+                .col-sm-6.form-group
+                    label.cols-sm-2.control-label(for='anamnesi') Anamnesi (max 500 caratteri):
+                    textarea#anamnesi.form-control(rows='1', maxlength='500')
+            // Consulenza chirurgica ed anestesiologica
+            .row
+                .col-sm-6.form-group
+                    label.cols-sm-2.control-label(for='consulenzaChirurgica') Consulenza chirurgica (max 500 caratteri):
+                    textarea#consulenzaChirurgica.form-control(rows='1', maxlength='500')
+                .col-sm-6.form-group
+                    label.cols-sm-2.control-label(for='consulenzaAnestesiologica') Consulenza anestesiologica (max 500 caratteri):
+                    textarea#consulenzaAnestesiologica.form-control(rows='1', maxlength='500')
+        .form-group
+            button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
 block myScript

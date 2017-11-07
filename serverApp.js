@@ -16,6 +16,7 @@ var user = require('./routes/user');
 var dati = require('./routes/dati');
 var database = require('./routes/database');
 var informazioni = require('./routes/informazioni');
+var intervento = require('./routes/intervento');
 
 var app = express();
 
@@ -49,6 +50,7 @@ app.use('/user', user);
 app.use('/dati', dati);
 app.use('/database', database);
 app.use('/informazioni', informazioni);
+app.use('/intervento', intervento);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
