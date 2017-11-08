@@ -34,17 +34,15 @@ $(".input-file").before(
 $(function() {
     $('#datetimepicker1').datetimepicker();
     $('#datetimepicker2').datetimepicker();
-    $('#inizioRicovero').datetimepicker();
-    $('#fineRicovero').datetimepicker();
-    $('#datetimepickerDataIntervento').datetimepicker();
+    $('#hiddenrow').hide();
 });
 
-navigator.getUserMedia = ( navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia ||
-    navigator.msGetUserMedia);
+
+navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+
 var video;
 var webcamStream;
+
 function startWebcam() {
     if (navigator.getUserMedia) {
         navigator.getUserMedia (
@@ -68,20 +66,53 @@ function startWebcam() {
         console.log("getUserMedia not supported");
     }
 }
+
 function stopWebcam() {
     webcamStream.stop();
 }
-//---------------------
-// TAKE A SNAPSHOT CODE
-//---------------------
+
 var canvas, ctx;
+
 function init() {
-    // Get the canvas and obtain a context for
-    // drawing in it
     canvas = document.getElementById("myCanvas");
     ctx = canvas.getContext('2d');
 }
+
 function snapshot() {
-    // Draws current image from the video element into the canvas
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+}
+
+function visualizzaCamera(){
+    $('#hiddenrow').show();
+}
+
+function salvaAnagrafica() {
+    
+    var data ={};
+
+    $.ajax({
+        url: '/salvaAnagrafica',
+        type: 'POST',
+        data: data,
+        contentType: 'application/json',
+        success: function(data){
+            
+        },
+        failure: function (data) {
+            
+        }
+    });
+
+}
+
+function salvaCartella(){
+
+}
+
+function salvaDati(){
+
+    salvaAnagrafica();
+
+    salvaCartella();
+
 }

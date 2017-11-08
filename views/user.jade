@@ -80,7 +80,25 @@ block contenutoNav
                             .col-sm-5.form-group
                                 label.cols-sm-2.control-label(for='scattaFoto') Scatta Foto
                                 .cols-sm-10
-                                    a#scattaFoto.btn.btn-primary(href='#', target='_blank', type='button') Scatta da Camera
+                                    a#scattaFoto.btn.btn-primary(onclick='visualizzaCamera();', target='_blank', type='button') Scatta da Camera
+                        //Foto
+                        .row#hiddenrow
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='avviaCam') Scatta Foto
+                                br
+                                .col-sm-10
+                                    video#video(onclick='snapshot(this);', width='350', height='350', controls='', autoplay='')
+                                .cols-sm-10
+                                    a#avviaCam.btn.btn-primary(onclick='startWebcam();', type='button', href='#') Start WebCam
+                                    a#arrestaCam.btn.btn-danger(onclick='stopWebcam();', type='button', href='#') Stop WebCam
+                                    a#catturaFoto.btn.btn-success(onclick='snapshot();', type='button', href='#') Cattura Immagine
+                            .col-sm-6.form-group
+                                label.cols-sm-2.control-label(for='myCanvas') Scatto catturato
+                                br
+                                br
+                                br
+                                .cols-sm-10
+                                    canvas#myCanvas(width='350', height='250')
                         h2.well Dati paziente:
                         // Cartella Nome Cognome
                         .row
@@ -189,6 +207,7 @@ block contenutoNav
                                         span.glyphicon-calendar.glyphicon
         br
         .container-fluid
-            button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
+            button.btn.btn-primary.pull-right(onclick='salvaDati();',type='submit', disabled='') Submit
+
 block myScript
-    script(src="assets/js/userController.js")
+    script(src="assets/js/controllers/userController.js")
