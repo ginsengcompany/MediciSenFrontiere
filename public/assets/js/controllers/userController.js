@@ -87,22 +87,50 @@ function visualizzaCamera(){
 }
 
 function salvaAnagrafica() {
+
+    var nome = $('#nome').val();
+    var cognome = $('#cognome').val();
+    var anni = $('#anni').val();
+    var sesso = $('#sesso').val();
+    var peso = $('#peso').val();
+    var villaggio = $('#villaggio').val();
+    var distretto = $('#distretto').val();
+    var contea = $('#contea').val();
+    var madre = $('#madre').val();
+    var padre = $('#padre').val();
+    var telefono = $('#telefono').val();
+    var malaria = $('#malaria').val();
+    var inizio = $('#datetimepicker1').val();
+    var fine = $('#datetimepicker2').val();
     
-    var data ={};
+    var data = {
+        'nome' : nome,
+        'cognome' : cognome,
+        'anni' : anni,
+        'sesso' : sesso,
+        'peso' : peso,
+        'villaggio' : villaggio,
+        'distretto' : distretto,
+        'contea' : contea,
+        'madre' : madre,
+        'padre' : padre,
+        'telefono' : telefono,
+        'malaria' : malaria,
+        'inizio' : inizio,
+        'fine' : fine
+    };
 
     $.ajax({
         url: '/salvaAnagrafica',
         type: 'POST',
-        data: data,
+        data: JSON.stringify(data),
+        cache: false,
         contentType: 'application/json',
-        success: function(data){
-            
-        },
-        failure: function (data) {
-            
+        success: function(data) {
+            console.log('success');
+            console.log(JSON.stringify(data));
         }
     });
-
 }
 
 function salvaCartella(){
@@ -110,9 +138,5 @@ function salvaCartella(){
 }
 
 function salvaDati(){
-
     salvaAnagrafica();
-
-    salvaCartella();
-
 }

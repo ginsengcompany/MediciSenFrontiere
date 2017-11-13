@@ -119,21 +119,21 @@ block contenutoNav
                         // Anni Sesso Peso
                         .row
                             .col-sm-4.form-group
-                                label.cols-sm-2.control-label(for='nome') Anni
+                                label.cols-sm-2.control-label(for='anni') Anni
                                 .cols-sm-10
                                     .input-group
                                         span.input-group-addon
                                             i.fa.fa-calendar.fa(aria-hidden='true')
                                         input#anni.form-control(type='text', placeholder='Anni')
                             .col-sm-4.form-group
-                                label.cols-sm-2.control-label(for='cognome') Sesso
+                                label.cols-sm-2.control-label(for='sesso') Sesso
                                 .cols-sm-10
                                     .input-group
                                         span.input-group-addon
                                             i.fa.fa-venus-mars.fa(aria-hidden='true')
                                         input#sesso.form-control(type='text', placeholder='Sesso')
                             .col-sm-4.form-group
-                                label.cols-sm-2.control-label(for='cognome') Peso
+                                label.cols-sm-2.control-label(for='peso') Peso
                                 .cols-sm-10
                                     .input-group
                                         span.input-group-addon
@@ -207,7 +207,7 @@ block contenutoNav
                                         span.glyphicon-calendar.glyphicon
         br
         .container-fluid
-            button.btn.btn-primary.pull-right(onclick='salvaDati();',type='submit', disabled='') Submit
+            button.btn.btn-primary.pull-right(onclick='salvaDati();') Submit
 
 block myScript
     script(src="assets/js/controllers/userController.js")

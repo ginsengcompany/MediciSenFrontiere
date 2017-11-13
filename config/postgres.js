@@ -6,6 +6,7 @@ var connectionString = config.dbpostgres.protocol + '://' + config.dbpostgres.us
 function createConnectionPostgres(app){
     var pgClient = new pg.Client(connectionString);
     pgClient.connect();
+    return pgClient;
 }
 
 module.exports = function(app) {
