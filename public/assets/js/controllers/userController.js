@@ -6,31 +6,6 @@ $(document).ready(function() {
     });
 });
 
-$(".input-file").before(
-    function() {
-        if (!$(this).prev().hasClass('input-ghost')) {
-            var element = $("<input type='file' class='input-ghost' style='visibility:hidden; height:0'>");
-            element.attr("name",$(this).attr("name"));
-            element.change(function(){
-                element.next(element).find('input').val((element.val()).split('\\').pop());
-            });
-            $(this).find("button.btn-choose").click(function(){
-                element.click();
-            });
-            $(this).find("button.btn-reset").click(function(){
-                element.val(null);
-                $(this).parents(".input-file").find('input').val('');
-            });
-            $(this).find('input').css("cursor","pointer");
-            $(this).find('input').mousedown(function() {
-                $(this).parents('.input-file').prev().click();
-                return false;
-            });
-            return element;
-        }
-    }
-);
-
 $(function() {
     $('#datetimepicker1').datetimepicker();
     $('#datetimepicker2').datetimepicker();
@@ -80,61 +55,101 @@ function init() {
 
 function snapshot() {
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    var imageURL = canvas.toDataURL();
+    datiAnagrafica['foto_paziente']= imageURL;
 }
 
 function visualizzaCamera(){
     $('#hiddenrow').show();
 }
 
+var datiAnagrafica = {
+    'nome' : '',
+    'cognome' : '',
+    'anni' : '',
+    'sesso' : '',
+    'peso' : '',
+    'villaggio' : '',
+    'distretto' : '',
+    'contea' : '',
+    'madre' : '',
+    'padre' : '',
+    'telefono' : '',
+    'malaria' : '',
+    'inizio' : '',
+    'fine' : '',
+    'surgey_children' : '',
+    'numero_cartella' : '',
+    'cartella': '',
+    'st_mary_hospital' : ''
+};
+
+
+function encodeImageFileAsURL(element) {
+    var file = element.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+        //console.log('RESULT', reader.result);
+        datiAnagrafica['foto_paziente']= reader.result;
+    };
+    reader.readAsDataURL(file);
+
+}
+
 function salvaAnagrafica() {
 
-    var nome = $('#nome').val();
-    var cognome = $('#cognome').val();
-    var anni = $('#anni').val();
-    var sesso = $('#sesso').val();
-    var peso = $('#peso').val();
-    var villaggio = $('#villaggio').val();
-    var distretto = $('#distretto').val();
-    var contea = $('#contea').val();
-    var madre = $('#madre').val();
-    var padre = $('#padre').val();
-    var telefono = $('#telefono').val();
-    var malaria = $('#malaria').val();
-    var inizio = $('#datetimepicker1').val();
-    var fine = $('#datetimepicker2').val();
+    datiAnagrafica.nome = $('#nome').val();
+    datiAnagrafica.cognome = $('#cognome').val();
+    datiAnagrafica.anni = $('#anni').val();
+    datiAnagrafica.sesso = $('#sesso').val();
+    datiAnagrafica.peso = $('#peso').val();
+    datiAnagrafica.villaggio = $('#villaggio').val();
+    datiAnagrafica.distretto = $('#distretto').val();
+    datiAnagrafica.contea = $('#contea').val();
+    datiAnagrafica.madre = $('#madre').val();
+    datiAnagrafica.padre = $('#padre').val();
+    datiAnagrafica.telefono = $('#telefono').val();
+    datiAnagrafica.malaria = $('#malaria').val();
+    datiAnagrafica.inizio = $('#datetimepicker1').data();
+    datiAnagrafica.fine = $('#datetimepicker2').data();
+    datiAnagrafica.surgey_children = $('#surgeyChildren').val();
+    datiAnagrafica.st_mary_hospital = $('#stMaryHospital').val();
+    datiAnagrafica.cartella = $('#cartellaClinica').val();
+    datiAnagrafica.numero_cartella = $('#numeroCartella').val();
+
     
-    var data = {
-        'nome' : nome,
-        'cognome' : cognome,
-        'anni' : anni,
-        'sesso' : sesso,
-        'peso' : peso,
-        'villaggio' : villaggio,
-        'distretto' : distretto,
-        'contea' : contea,
-        'madre' : madre,
-        'padre' : padre,
-        'telefono' : telefono,
-        'malaria' : malaria,
-        'inizio' : inizio,
-        'fine' : fine
-    };
+
+    console.log(datiAnagrafica);
 
     $.ajax({
         url: '/salvaAnagrafica',
         type: 'POST',
-        data: JSON.stringify(data),
+        data: JSON.stringify(datiAnagrafica),
         cache: false,
         contentType: 'application/json',
         success: function(data) {
-            console.log('success');
-            console.log(JSON.stringify(data));
+            alert('Inserimento effettuato con Successo!');
+            $('#nome').val('');
+            $('#cognome').val('');
+            $('#anni').val('');
+            $('#sesso').val('');
+            $('#peso').val('');
+            $('#villaggio').val('');
+            $('#distretto').val('');
+            $('#contea').val('');
+            $('#madre').val('');
+            $('#padre').val('');
+            $('#telefono').val('');
+            $('#malaria').val('');
+            $('#surgeyChildren').val('');
+            $('#stMaryHospital').val('');
+            $('#cartellaClinica').val('');
+            $('#numeroCartella').val('');
+        },
+        faliure: function(data) {
+            alert('Inserire tutti i CAMPI!');
         }
     });
-}
-
-function salvaCartella(){
-
 }
 
 function salvaDati(){

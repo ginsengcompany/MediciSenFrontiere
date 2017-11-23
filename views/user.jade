@@ -65,18 +65,9 @@ block contenutoNav
                                         input#numeroCartella.form-control(type='text', placeholder='Numero')
                         // Carica immagini da pc
                         .row
-                            .col-md-6
-                                form(method='POST', action='#', enctype='multipart/form-data')
-                                    .form-group
-                                        label.cols-sm-2.control-label(for='caricaFoto') Carica Immagine da PC
-                                        .input-group.input-file(name='Fichier1')
-                                            span.input-group-addon
-                                                i.fa.fa-file-image-o.fa(aria-hidden='true')
-                                            span.input-group-btn
-                                                button.btn.btn-default.btn-choose(type='button') Seleziona
-                                            input#caricaFoto.form-control(type='text', accept='image/*', placeholder='Carica immagini da PC...')
-                                            span.input-group-btn
-                                                button.btn.btn-warning.btn-reset(type='button') Reset
+                            .col-md-6.form-group
+                                label.cols-sm-2.control-label(for='caricaFoto') Carica Immagine da PC
+                                input#caricaFoto.form-control(type='file', onchange='encodeImageFileAsURL(this)')
                             .col-sm-5.form-group
                                 label.cols-sm-2.control-label(for='scattaFoto') Scatta Foto
                                 .cols-sm-10
@@ -126,12 +117,11 @@ block contenutoNav
                                             i.fa.fa-calendar.fa(aria-hidden='true')
                                         input#anni.form-control(type='text', placeholder='Anni')
                             .col-sm-4.form-group
-                                label.cols-sm-2.control-label(for='sesso') Sesso
+                                label(for='sesso') Sesso:
                                 .cols-sm-10
-                                    .input-group
-                                        span.input-group-addon
-                                            i.fa.fa-venus-mars.fa(aria-hidden='true')
-                                        input#sesso.form-control(type='text', placeholder='Sesso')
+                                    select#sesso.form-control
+                                        option M
+                                        option F
                             .col-sm-4.form-group
                                 label.cols-sm-2.control-label(for='peso') Peso
                                 .cols-sm-10
