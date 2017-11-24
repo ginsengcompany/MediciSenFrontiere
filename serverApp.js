@@ -17,10 +17,12 @@ var dati = require('./routes/dati');
 var database = require('./routes/database');
 var informazioni = require('./routes/informazioni');
 var intervento = require('./routes/intervento');
+var fotointervento = require('./routes/fotointervento');
 var followup = require('./routes/followup');
 var inserisciPaziente = require('./app/routes/inserisciPaziente');
 var getPaziente = require('./app/routes/getPaziente');
 var inserisciInformazioni = require('./app/routes/inserisciInformazioni');
+var inserisciIntervento = require('./app/routes/inserisciIntervento');
 
 var app = express();
 var con = postgres(app);
@@ -57,10 +59,12 @@ app.use('/dati', dati);
 app.use('/database', database);
 app.use('/informazioni', informazioni);
 app.use('/intervento', intervento);
+app.use('/fotointervento',fotointervento);
 app.use('/followup', followup);
 app.use('/salvaAnagrafica',inserisciPaziente);
 app.use('/getPaziente',getPaziente);
 app.use('/salvaInformazioni',inserisciInformazioni);
+app.use('/salvaIntervento',inserisciIntervento);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -14,7 +14,7 @@ router.post('/',function (req, res, next) {
     var dataFine = datiInformazioniPaziente.data_dimissione.date;
     var dataFin = moment(dataFine).format();
 
-    var queryPostAnagrafica = "INSERT INTO medici_senza_frontiere.tb_informazioni_cliniche " +
+    var queryPostInformazioni = "INSERT INTO medici_senza_frontiere.tb_informazioni_cliniche " +
         "(data_ricovero, data_dimissione, diagnosi, anamnesi, consulenza_chiurugica, consulenza_anestesiologica, id_paziente)" +
         "VALUES (" +
         "'" + dataIni                                              +"', " +
@@ -27,7 +27,7 @@ router.post('/',function (req, res, next) {
 
     var client = connectionPostgres();
 
-    const query = client.query(queryPostAnagrafica);
+    const query = client.query(queryPostInformazioni);
 
     query.on("row", function (row, result) {
         result.addRow(row);

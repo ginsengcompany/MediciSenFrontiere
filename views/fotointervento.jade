@@ -9,11 +9,11 @@ block contenutoNav
         a(href='/informazioni')
             i.pe-7s-info
             p Informazioni Cliniche
-    li.active
+    li
         a(href='/intervento')
             i.pe-7s-note2
             p Intervento
-    li
+    li.active
         a(href='/fotointervento')
             i.pe-7s-camera
             p Foto Intervento
@@ -33,7 +33,7 @@ block contenutoNav
 .div
     block contenuto
         .container-fluid
-            h2.well Intervento:
+            h2.well Foto Intervento:
             .row
                 .col-sm-4.form-group
                     label(for='paziente') Paziente:
@@ -41,31 +41,30 @@ block contenutoNav
                         select#paziente.form-control(onchange='changeSelectPaziente();')
                             option(value='', selected='selected')
                 .col-sm-8.form-group
-                    label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
+                    label.cols-sm-2.control-label(for='myCanvas') Foto Paziente
                     .cols-sm-10
                         img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
-            // Intervendo e descrizione
+            // Foto
             .row
                 .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='dataIntervento') Data intervento:
-                    #datetimepickerDataIntervento.input-group.date
-                        input#dataIntervento.form-control(type='text')
-                        span.input-group-addon
-                            span.glyphicon-calendar.glyphicon
+                    label.cols-sm-2.control-label(for='avviaCam') Scatta Foto
+                    br
+                    .col-sm-10
+                        video#video(onclick='snapshot(this);', width='350', height='350', controls='', autoplay='')
+                    .cols-sm-10
+                        a#avviaCam.btn.btn-primary(onclick='startWebcam();', type='button', href='#') Start WebCam
+                        a#arrestaCam.btn.btn-danger(onclick='stopWebcam();', type='button', href='#') Stop WebCam
+                        a#catturaFoto.btn.btn-success(onclick='snapshot();', type='button', href='#') Cattura Immagine
                 .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='descrizioneIntervento') Descrizione intervento (max 500 caratteri):
-                    textarea#descrizioneIntervento.form-control(rows='1', maxlength='500')
-            // Foglio diario clinico e complicanze
-            .row
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='foglioDiarioClinico') Foglio Diario Clinico (max 500 caratteri):
-                    textarea#foglioDiarioClinico.form-control(rows='1', maxlength='500')
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='complicanze') Complicanze (max 500 caratteri):
-                    textarea#complicanze.form-control(rows='1', maxlength='500')
+                    label.cols-sm-2.control-label(for='myCanvas') Scatto catturato
+                    br
+                    br
+                    br
+                    .cols-sm-10
+                        canvas#myCanvas(width='350', height='250')
         br
         .container-fluid
             button.btn.btn-primary.pull-right(type='submit', onclick='salvaDati();') Submit
 
 block myScript
-    script(src="assets/js/controllers/interventoController.js")
+    script(src="assets/js/controllers/fotointerventoController.js")

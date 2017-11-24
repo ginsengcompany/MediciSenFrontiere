@@ -1,0 +1,42 @@
+var express = require('express');
+var router = express.Router();
+var postgresConnection = require('../../config/postgres');
+var moment = require('moment');
+
+var connectionPostgres = function () {
+    return postgresConnection();
+};
+
+router.post('/',function (req, res, next) {
+    var datiIntervento = req.body;
+    var dataInizio = datiIntervento.dataIntervento.date;
+    var dataIni = moment(dataInizio).format();
+
+    var queryPostIntervento = "INSERT INTO medici_senza_frontiere.tb_intervento " +
+        "(data_intervento, descrizione_intervento, foglio_diario_clinico, complicanze, id_paziente)" +
+        "VALUES (" +
+        "'" + dataIni                                 +"', " +
+        "'" + datiIntervento.descrizioneIntervento    +"', " +
+        "'" + datiIntervento.foglioDiarioClinico      +"', " +
+        "'" + datiIntervento.complicanze              +"', " +
+        "'" + datiIntervento.paziente                 +"')";
+
+    var client = connectionPostgres();
+
+    const query = client.query(queryPostIntervento);
+
+    query.on("row", function (row, result) {
+        result.addRow(row);
+    });
+
+    query.on("end", function (result) {
+        var myOjb = JSON.stringify(result.rows, null, "    ");
+        var final = JSON.parse(myOjb);
+        return res.json(final);
+        client.end();
+    });
+
+
+});
+
+module.exports = router;

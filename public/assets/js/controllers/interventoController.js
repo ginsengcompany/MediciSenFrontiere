@@ -1,58 +1,66 @@
-$(document).ready(function() {
-    init();
-    $('a#avviaCam,a#arrestaCam,a#catturaFoto').click(function(e) {
-        e.preventDefault();
-        return false;
-    });
+var pazienti;
+
+$.ajax({
+    url: '/getPaziente',
+    type: 'GET',
+    contentType: 'application/json',
+    success: function(data) {
+
+        var combopazienti = data;
+        var select = document.getElementById("paziente");
+        for(index in combopazienti) {
+            select.options[select.options.length] = new Option(combopazienti[index].cognome + " " + combopazienti[index].nome, JSON.stringify(combopazienti[index]));
+            pazienti = combopazienti[index];
+        }
+
+    },
+    faliure: function(data) {
+
+    }
 });
 
 $(function() {
     $('#datetimepickerDataIntervento').datetimepicker();
 });
 
-navigator.getUserMedia = ( navigator.getUserMedia ||
-    navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia ||
-    navigator.msGetUserMedia);
-var video;
-var webcamStream;
-function startWebcam() {
-    if (navigator.getUserMedia) {
-        navigator.getUserMedia (
-            // constraints
-            {
-                video: true,
-                audio: false
-            },
-            // successCallback
-            function(localMediaStream) {
-                video = document.querySelector('video');
-                video.src = window.URL.createObjectURL(localMediaStream);
-                webcamStream = localMediaStream;
-            },
-            // errorCallback
-            function(err) {
-                console.log("The following error occured: " + err);
-            }
-        );
-    } else {
-        console.log("getUserMedia not supported");
-    }
+function changeSelectPaziente(){
+    document.getElementById('fotoProfilo').style.display = 'block';
+    document.getElementById('fotoProfilo').src = pazienti.foto_paziente.replace(/"/g, '');
 }
-function stopWebcam() {
-    webcamStream.stop();
-}
-//---------------------
-// TAKE A SNAPSHOT CODE
-//---------------------
-var canvas, ctx;
-function init() {
-    // Get the canvas and obtain a context for
-    // drawing in it
-    canvas = document.getElementById("myCanvas");
-    ctx = canvas.getContext('2d');
-}
-function snapshot() {
-    // Draws current image from the video element into the canvas
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+var datiIntervento = {
+    'dataIntervento' : '',
+    'descrizioneIntervento' : '',
+    'foglioDiarioClinico' : '',
+    'complicanze' : '',
+    'paziente' : ''
+};
+
+function salvaDati(){
+
+    datiIntervento.dataIntervento = $('#dataIntervento').val();
+    datiIntervento.descrizioneIntervento = $('#descrizioneIntervento').val();
+    datiIntervento.foglioDiarioClinico = $('#foglioDiarioClinico').val();
+    datiIntervento.complicanze = $('#complicanze').val();
+    datiIntervento.paziente = pazienti.id;
+
+    $.ajax({
+        url: '/salvaIntervento',
+        type: 'POST',
+        data: JSON.stringify(datiIntervento),
+        cache: false,
+        contentType: 'application/json',
+        success: function(data) {
+            alert('Inserimento effettuato con Successo!');
+            datiIntervento.dataIntervento = $('#dataIntervento').val('');
+            datiIntervento.descrizioneIntervento = $('#descrizioneIntervento').val('');
+            datiIntervento.foglioDiarioClinico = $('#foglioDiarioClinico').val('');
+            datiIntervento.complicanze = $('#complicanze').val('');
+            datiIntervento.paziente = $('#paziente').val('');
+        },
+        faliure: function(data) {
+            alert('Inserire tutti i CAMPI!');
+        }
+    });
+
 }
