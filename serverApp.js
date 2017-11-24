@@ -19,6 +19,8 @@ var informazioni = require('./routes/informazioni');
 var intervento = require('./routes/intervento');
 var followup = require('./routes/followup');
 var inserisciPaziente = require('./app/routes/inserisciPaziente');
+var getPaziente = require('./app/routes/getPaziente');
+var inserisciInformazioni = require('./app/routes/inserisciInformazioni');
 
 var app = express();
 var con = postgres(app);
@@ -57,6 +59,8 @@ app.use('/informazioni', informazioni);
 app.use('/intervento', intervento);
 app.use('/followup', followup);
 app.use('/salvaAnagrafica',inserisciPaziente);
+app.use('/getPaziente',getPaziente);
+app.use('/salvaInformazioni',inserisciInformazioni);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

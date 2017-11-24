@@ -117,7 +117,6 @@ function salvaAnagrafica() {
     datiAnagrafica.cartella = $('#cartellaClinica').val();
     datiAnagrafica.numero_cartella = $('#numeroCartella').val();
 
-    
 
     console.log(datiAnagrafica);
 
@@ -145,6 +144,7 @@ function salvaAnagrafica() {
             $('#stMaryHospital').val('');
             $('#cartellaClinica').val('');
             $('#numeroCartella').val('');
+            $('#hiddenrow').hide();
         },
         faliure: function(data) {
             alert('Inserire tutti i CAMPI!');

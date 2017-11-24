@@ -40,7 +40,16 @@ router.post('/',function (req, res, next) {
 
        const query = client.query(queryPostAnagrafica);
 
-       return res.json('success');
+       query.on("row", function (row, result) {
+          result.addRow(row);
+       });
+
+       query.on("end", function (result) {
+           var myOjb = JSON.stringify(result.rows, null, "    ");
+           var final = JSON.parse(myOjb);
+           return res.json(final);
+           client.end();
+       });
 
 
 });

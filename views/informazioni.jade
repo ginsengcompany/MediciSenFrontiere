@@ -30,7 +30,13 @@ block contenutoNav
     block contenuto
         .container-fluid
             h2.well Informazioni cliniche:
-                // Data ricovero e dimissione
+            .row
+                .col-sm-4.form-group
+                    label(for='paziente') Paziente:
+                    .cols-sm-10
+                        select#paziente.form-control
+                            option(value='', selected='selected')
+            // Data ricovero e dimissione
             .row
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='inizioRicovero') Data di ricovero:
@@ -62,7 +68,7 @@ block contenutoNav
                     textarea#consulenzaAnestesiologica.form-control(rows='1', maxlength='500')
         br
         .container-fluid
-            button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
+            button.btn.btn-primary.pull-right(type='submit', onclick='salvaDati();') Submit
 
 block myScript
     script(src="assets/js/controllers/informazioniController.js")
