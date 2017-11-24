@@ -1,3 +1,24 @@
+var pazienti;
+
+$.ajax({
+    url: '/getPaziente',
+    type: 'GET',
+    contentType: 'application/json',
+    success: function(data) {
+
+        var combopazienti = data;
+        var select = document.getElementById("paziente");
+        pazienti = combopazienti;
+        for(index in combopazienti) {
+            select.options[select.options.length] = new Option(combopazienti[index].cognome + " " + combopazienti[index].nome, JSON.stringify(combopazienti[index]));
+        }
+
+    },
+    faliure: function(data) {
+
+    }
+});
+
 $(document).ready(function() {
     init();
     $('a#avviaCam,a#arrestaCam,a#catturaFoto').click(function(e) {
@@ -7,6 +28,13 @@ $(document).ready(function() {
 });
 
 navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+
+function changeSelectPaziente(){
+    document.getElementById('fotoProfilo').style.display = 'block';
+    var indice = $('#paziente').val();
+    var indice2 = JSON.parse(indice);
+    document.getElementById('fotoProfilo').src = indice2.foto_paziente.replace(/"/g, '');
+}
 
 var video;
 var webcamStream;

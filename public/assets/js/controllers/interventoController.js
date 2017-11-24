@@ -25,7 +25,9 @@ $(function() {
 
 function changeSelectPaziente(){
     document.getElementById('fotoProfilo').style.display = 'block';
-    document.getElementById('fotoProfilo').src = pazienti.foto_paziente.replace(/"/g, '');
+    var indice = $('#paziente').val();
+    var indice2 = JSON.parse(indice);
+    document.getElementById('fotoProfilo').src = indice2.foto_paziente.replace(/"/g, '');
 }
 
 var datiIntervento = {
