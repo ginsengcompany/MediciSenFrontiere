@@ -11,8 +11,9 @@ $.ajax({
 
         var combopazienti = data;
         var select = document.getElementById("paziente");
+        pazienti = combopazienti;
         for(index in combopazienti) {
-            select.options[select.options.length] = new Option(combopazienti[index].cognome + " " + combopazienti[index].nome, JSON.stringify(combopazienti[index].id));
+            select.options[select.options.length] = new Option(combopazienti[index].cognome + " " + combopazienti[index].nome, JSON.stringify(combopazienti[index]));
         }
 
     },
@@ -20,6 +21,13 @@ $.ajax({
 
     }
 });
+
+function changeSelectPaziente(){
+    document.getElementById('fotoProfilo').style.display = 'block';
+    var indice = $('#paziente').val();
+    var indice2 = JSON.parse(indice);
+    document.getElementById('fotoProfilo').src = indice2.foto_paziente.replace(/"/g, '');
+}
 
 var datiInformazioni = {
     'data_ricovero' : '',

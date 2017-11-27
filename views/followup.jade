@@ -37,6 +37,21 @@ block contenutoNav
             // Indagini radiografiche ecografiche ed ematochimihce
             .row
                 .col-sm-4.form-group
+                    label(for='paziente') Paziente:
+                    .cols-sm-10
+                        select#paziente.form-control(onchange='changeSelectPaziente();')
+                            option(value='', selected='selected')
+                .col-sm-4.form-group
+                    label(for='intervento') Intervento:
+                    .cols-sm-10
+                        select#intervento.form-control(onchange='')
+                            option(value='', selected='selected')
+                .col-sm-4.form-group
+                    label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
+                    .cols-sm-10
+                        img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
+            .row
+                .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='indaginiRadiografiche') Indagini radiografiche (max 500 caratteri):
                     textarea#indaginiRadiografiche.form-control(rows='1', maxlength='500')
                 .col-sm-4.form-group
@@ -55,5 +70,6 @@ block contenutoNav
                     textarea#anniPrecedenti.form-control(rows='1', maxlength='500')
         br
         .container-fluid
-            button.btn.btn-primary.pull-right(type='submit', disabled='') Submit
+            button.btn.btn-primary.pull-right(type='submit', onclick='salvaDati();') Submit
 block myScript
+    script(src="assets/js/controllers/followupController.js")

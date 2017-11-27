@@ -19,16 +19,6 @@ $.ajax({
     }
 });
 
-$(document).ready(function() {
-    init();
-    $('a#avviaCam,a#arrestaCam,a#catturaFoto').click(function(e) {
-        e.preventDefault();
-        return false;
-    });
-});
-
-navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-
 var datiIntervento = {
     'username' : ''
 };
@@ -61,55 +51,15 @@ function changeSelectPaziente(){
     });
 }
 
-var video;
-var webcamStream;
-
-function startWebcam() {
-    if (navigator.getUserMedia) {
-        navigator.getUserMedia (
-            // constraints
-            {
-                video: true,
-                audio: false
-            },
-            // successCallback
-            function(localMediaStream) {
-                video = document.querySelector('video');
-                video.src = window.URL.createObjectURL(localMediaStream);
-                webcamStream = localMediaStream;
-            },
-            // errorCallback
-            function(err) {
-                console.log("The following error occured: " + err);
-            }
-        );
-    } else {
-        console.log("getUserMedia not supported");
-    }
-}
-
-function stopWebcam() {
-    webcamStream.stop();
-}
-
-var canvas, ctx;
-
-function init() {
-    canvas = document.getElementById("myCanvas");
-    ctx = canvas.getContext('2d');
-}
-
-var datiFoto = {
-    'paziente' : '',
-    'intervento' : '',
-    'foto' : ''
+var datiFollowup = {
+    'indagini_radiografiche':'',
+    'indagini_ecografiche':'',
+    'indegini_ematochimiche':'',
+    'follow_up':'',
+    'anni_precedenti':'',
+    'id_paziente':'',
+    'id_intervento':''
 };
-
-function snapshot() {
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    var imageURL = canvas.toDataURL();
-    datiFoto.foto = imageURL;
-}
 
 function salvaDati(){
 
@@ -119,13 +69,18 @@ function salvaDati(){
     var indice1 = $('#intervento').val();
     var indice3 = JSON.parse(indice1);
 
-    datiFoto.paziente=indice2.id;
-    datiFoto.intervento=indice3.id;
+    datiFollowup.id_paziente=indice2.id;
+    datiFollowup.id_intervento=indice3.id;
+    datiFollowup.indagini_radiografiche = $('#indaginiRadiografiche').val();
+    datiFollowup.indagini_ecografiche = $('#indaginiEcografiche').val();
+    datiFollowup.indegini_ematochimiche = $('#indaginiEmatochimiche').val();
+    datiFollowup.follow_up = $('#followUp').val();
+    datiFollowup.anni_precedenti = $('#anniPrecedenti').val();
 
     $.ajax({
-        url: '/inserisciFoto',
+        url: '/inserisciFollowUp',
         type: 'POST',
-        data: JSON.stringify(datiFoto),
+        data: JSON.stringify(datiFollowup),
         cache: false,
         contentType: 'application/json',
         success: function(data) {
