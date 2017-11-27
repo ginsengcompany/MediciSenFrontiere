@@ -23,6 +23,8 @@ var inserisciPaziente = require('./app/routes/inserisciPaziente');
 var getPaziente = require('./app/routes/getPaziente');
 var inserisciInformazioni = require('./app/routes/inserisciInformazioni');
 var inserisciIntervento = require('./app/routes/inserisciIntervento');
+var getIntervento = require('./app/routes/getIntervento');
+var inserisciFoto = require('./app/routes/inserisciFoto');
 
 var app = express();
 var con = postgres(app);
@@ -65,6 +67,8 @@ app.use('/salvaAnagrafica',inserisciPaziente);
 app.use('/getPaziente',getPaziente);
 app.use('/salvaInformazioni',inserisciInformazioni);
 app.use('/salvaIntervento',inserisciIntervento);
+app.use('/getIntervento',getIntervento);
+app.use('/inserisciFoto',inserisciFoto);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

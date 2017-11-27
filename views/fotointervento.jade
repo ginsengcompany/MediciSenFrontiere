@@ -40,7 +40,12 @@ block contenutoNav
                     .cols-sm-10
                         select#paziente.form-control(onchange='changeSelectPaziente();')
                             option(value='', selected='selected')
-                .col-sm-8.form-group
+                .col-sm-4.form-group
+                    label(for='intervento') Intervento:
+                    .cols-sm-10
+                        select#intervento.form-control(onchange='')
+                            option(value='', selected='selected')
+                .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='myCanvas') Foto Paziente
                     .cols-sm-10
                         img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
