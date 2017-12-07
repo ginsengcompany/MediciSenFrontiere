@@ -7,7 +7,7 @@ var connectionPostgres = function () {
 };
 
 router.get('/',function (req, res, next) {
-    var queryGetAnagrafica = "SELECT cognome , nome , id, foto_paziente FROM medici_senza_frontiere.tb_anagrafica"
+    var queryGetAnagrafica = "SELECT cognome , nome , _id, foto_paziente FROM medici_senza_frontiere.tb_anagrafica"
     var client = connectionPostgres();
 
     var query = client.query(queryGetAnagrafica);

@@ -18,7 +18,7 @@ router.post('/',function (req, res, next) {
     var anni_precedenti = datiFollowUp.anni_precedenti;
 
     var queryPostIntervento = "INSERT INTO medici_senza_frontiere.tb_follow_up " +
-        "(id_paziente, id_intervento, indagini_radiografiche, indagini_ecografiche, indegini_ematochimiche, follow_up, anni_precedenti)" +
+        "(id_paziente, id_intervento, indagini_radiografiche, indagini_ecografiche, indagini_ematochimiche, follow_up, anni_precedenti)" +
         "VALUES (" +
         "'" + id_paziente           +"', " +
         "'" + id_intervento         +"', " +
