@@ -7,12 +7,20 @@
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "child_process": "^1.0.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "http-proxy": "^1.16.2",
     "jade": "~1.11.0",
+    "less-middleware": "^2.2.1",
+    "moment": "^2.19.4",
     "morgan": "~1.9.0",
+    "path": "^0.12.7",
+    "pg": "^6.4.1",
+    "pg-backup": "latest",
     "serve-favicon": "~2.4.5",
-    "pg-backup": "latest"
+    "shelljs": "^0.7.8",
+    "sys": "0.0.1"
   }
 }

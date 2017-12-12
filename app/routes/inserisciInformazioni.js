@@ -23,7 +23,7 @@ router.post('/',function (req, res, next) {
         "'" + datiInformazioniPaziente.anamnesi                    +"', " +
         "'" + datiInformazioniPaziente.consulenza_chiurugica       +"', " +
         "'" + datiInformazioniPaziente.consulenza_anestesiologica  +"', " +
-        "'" + datiInformazioniPaziente.id_paziente                 +"')";
+        "'" + datiInformazioniPaziente.id_paziente._id                 +"')";
 
     var client = connectionPostgres();
 

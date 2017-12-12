@@ -26,6 +26,7 @@ var inserisciIntervento = require('./app/routes/inserisciIntervento');
 var getIntervento = require('./app/routes/getIntervento');
 var inserisciFoto = require('./app/routes/inserisciFoto');
 var inserisciFollowUp = require('./app/routes/inserisciFollowUp');
+var getBackup = require('./app/routes/getBackup');
 
 var app = express();
 var con = postgres(app);
@@ -41,7 +42,6 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
-var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
@@ -71,6 +71,8 @@ app.use('/salvaIntervento',inserisciIntervento);
 app.use('/getIntervento',getIntervento);
 app.use('/inserisciFoto',inserisciFoto);
 app.use('/inserisciFollowUp',inserisciFollowUp);
+app.use('/getBackup',getBackup);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

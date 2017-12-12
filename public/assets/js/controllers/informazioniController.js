@@ -47,7 +47,8 @@ function salvaDati(){
     datiInformazioni.anamnesi = $('#anamnesi').val();
     datiInformazioni.consulenza_chiurugica = $('#consulenzaChirurgica').val();
     datiInformazioni.consulenza_anestesiologica = $('#consulenzaAnestesiologica').val();
-    datiInformazioni.id_paziente = $('#paziente').val();
+    var id_paziente = $('#paziente').val();
+    datiInformazioni.id_paziente = JSON.parse(id_paziente);
 
 
     $.ajax({

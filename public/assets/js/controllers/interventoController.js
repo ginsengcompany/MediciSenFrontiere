@@ -44,7 +44,7 @@ function salvaDati(){
     datiIntervento.descrizioneIntervento = $('#descrizioneIntervento').val();
     datiIntervento.foglioDiarioClinico = $('#foglioDiarioClinico').val();
     datiIntervento.complicanze = $('#complicanze').val();
-    datiIntervento.paziente = pazienti.id;
+    datiIntervento.paziente = pazienti._id;
 
     $.ajax({
         url: '/salvaIntervento',
