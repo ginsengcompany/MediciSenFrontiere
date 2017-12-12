@@ -6,11 +6,12 @@ var connectionPostgres = function () {
     return postgresConnection();
 };
 
-router.get('/',function (req, res, next) {
-    var queryGetAnagrafica = "SELECT * FROM medici_senza_frontiere.tb_anagrafica"
+router.post('/',function (req, res, next) {
+    var datiInformazioni = req.body;
+    var queryPostInformazioni = "SELECT * FROM medici_senza_frontiere.tb_informazioni_cliniche WHERE id_paziente = ' " + datiInformazioni.username +"'";
     var client = connectionPostgres();
 
-    var query = client.query(queryGetAnagrafica);
+    var query = client.query(queryPostInformazioni);
 
     query.on("row", function (row, result) {
         result.addRow(row);

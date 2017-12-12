@@ -34,6 +34,16 @@ block contenutoNav
     block contenuto
         .container-fluid
             h2.well Visualizzazione Cartella Paziente
+            .row
+                .col-sm-6.form-group
+                    label(for='paziente') Paziente:
+                    .cols-sm-10
+                        select#paziente.form-control(onchange='changeSelectPaziente();')
+                            option(value='', selected='selected')
+                .col-sm-6.form-group
+                    label.cols-sm-2.control-label(for='myCanvas') Foto Paziente
+                    .cols-sm-10
+                        img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
             // Cartella Clinica e Numero Cartella
             .row
                 .col-sm-6.form-group
@@ -42,14 +52,14 @@ block contenutoNav
                         .input-group
                             span.input-group-addon
                                 i.fa.fa-folder-open-o.fa(aria-hidden='true')
-                            input#cartellaClinica.form-control(type='text', placeholder='Cartella Clinica')
+                            input#cartellaClinica.form-control(type='text', placeholder='Cartella Clinica', disabled=true)
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='numeroCartella') Numero
                     .cols-sm-10
                         .input-group
                             span.input-group-addon
                                 i.fa.fa-sitemap.fa(aria-hidden='true')
-                            input#numeroCartella.form-control(type='text', placeholder='Numero')
+                            input#numeroCartella.form-control(type='text', placeholder='Numero', disabled=true)
             // Anni Sesso Peso
             .row
                 .col-sm-4.form-group
@@ -58,11 +68,11 @@ block contenutoNav
                         .input-group
                             span.input-group-addon
                                 i.fa.fa-calendar.fa(aria-hidden='true')
-                            input#anni.form-control(type='text', placeholder='Anni')
+                            input#anni.form-control(type='text', placeholder='Anni', disabled=true)
                 .col-sm-4.form-group
                     label(for='sesso') Sesso:
                     .cols-sm-10
-                        select#sesso.form-control
+                        select#sesso.form-control(disabled=true)
                             option M
                             option F
                 .col-sm-4.form-group
@@ -71,7 +81,7 @@ block contenutoNav
                         .input-group
                             span.input-group-addon
                                 i.fa.fa-balance-scale.fa(aria-hidden='true')
-                            input#peso.form-control(type='text', placeholder='Peso')
+                            input#peso.form-control(type='text', placeholder='Peso', disabled=true)
             // Madre Padre Telefono
             .row
                 .col-sm-4.form-group
@@ -80,21 +90,21 @@ block contenutoNav
                         .input-group
                             span.input-group-addon
                                 i.fa.fa-female.fa(aria-hidden='true')
-                            input#madre.form-control(type='text', placeholder='Madre')
+                            input#madre.form-control(type='text', placeholder='Madre', disabled=true)
                 .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='padre') Padre
                     .cols-sm-10
                         .input-group
                             span.input-group-addon
                                 i.fa.fa-male.fa(aria-hidden='true')
-                            input#padre.form-control(type='text', placeholder='Padre')
+                            input#padre.form-control(type='text', placeholder='Padre', disabled=true)
                 .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='telefono') Telefono
                     .cols-sm-10
                         .input-group
                             span.input-group-addon
                                 i.fa.fa-phone.fa(aria-hidden='true')
-                            input#telefono.form-control(type='text', placeholder='Telefono')
+                            input#telefono.form-control(type='text', placeholder='Telefono', disabled=true)
             // Malaria e periodo
             .row
                 .col-sm-4.form-group
@@ -102,21 +112,22 @@ block contenutoNav
                     .cols-sm-10
                         .input-group
                             span.input-group-addon
-                            input#malaria.form-control(type='text', placeholder='Malaria')
+                                i.fa.fa-hospital-o.fa(aria-hidden='true')
+                            input#malaria.form-control(type='text', placeholder='Malaria', disabled=true)
                 .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='inizio') Dal giorno:
                     .cols-sm-10
                         .input-group
                             span.input-group-addon
                                 i.glyphicon.glyphicon-calendar(aria-hidden='true')
-                            input#dalGiorno.form-control(type='text', placeholder='Dal giorno')
+                            input#dalGiorno.form-control(type='text', placeholder='Dal giorno', disabled=true)
                 .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='fine') Al giorno:
                     .cols-sm-10
                         .input-group
                             span.input-group-addon
                                 i.glyphicon.glyphicon-calendar(aria-hidden='true')
-                            input#alGiorno.form-control(type='text', placeholder='Al giorno')
+                            input#alGiorno.form-control(type='text', placeholder='Al giorno', disabled=true)
             h2.well Visualizzazione Informazioni Cliniche
             // Data ricovero
             .row
@@ -126,52 +137,57 @@ block contenutoNav
                         .input-group
                             span.input-group-addon
                                 i.glyphicon.glyphicon-calendar(aria-hidden='true')
-                            input#dataRicovero.form-control(type='text', placeholder='Data Ricovero')
+                            input#dataRicovero.form-control(type='text', placeholder='Data Ricovero', disabled=true)
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='dataDimissione') Data di dimissione:
                     .cols-sm-10
                         .input-group
                             span.input-group-addon
                                 i.glyphicon.glyphicon-calendar(aria-hidden='true')
-                            input#dataDimissione.form-control(type='text', placeholder='Data Dimissione')
+                            input#dataDimissione.form-control(type='text', placeholder='Data Dimissione', disabled=true)
             // Diagnosi Anamnesi
             .row
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='diagnosi') Diagnosi (max 500 caratteri):
-                    textarea#diagnosi.form-control(rows='1', maxlength='500')
+                    textarea#diagnosi.form-control(rows='1', maxlength='500', disabled=true)
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='anamnesi') Anamnesi (max 500 caratteri):
-                    textarea#anamnesi.form-control(rows='1', maxlength='500')
+                    textarea#anamnesi.form-control(rows='1', maxlength='500', disabled=true)
             // Consulenza chirurgica ed anestesiologica
             .row
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='consulenzaChirurgica') Consulenza chirurgica (max 500 caratteri):
-                    textarea#consulenzaChirurgica.form-control(rows='1', maxlength='500')
+                    textarea#consulenzaChirurgica.form-control(rows='1', maxlength='500', disabled=true)
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='consulenzaAnestesiologica')
                         | Consulenza anestesiologica (max 500 caratteri):
-                    textarea#consulenzaAnestesiologica.form-control(rows='1', maxlength='500')
+                    textarea#consulenzaAnestesiologica.form-control(rows='1', maxlength='500', disabled=true)
             h2.well Intervento e Descrizione
             // Intervendo e descrizione
             .row
-                .col-sm-6.form-group
+                .col-sm-4.form-group
+                    label(for='intervento') Intervento:
+                    .cols-sm-10
+                        select#intervento.form-control(onchange='changeSelectIntervento();')
+                            option(value='', selected='selected')
+                .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='dataIntervento') Data intervento:
                     .cols-sm-10
                         .input-group
                             span.input-group-addon
                                 i.glyphicon.glyphicon-calendar(aria-hidden='true')
-                            input#dataIntervento.form-control(type='text', placeholder='Data Intervento')
-                .col-sm-6.form-group
+                            input#dataIntervento.form-control(type='text', placeholder='Data Intervento', disabled=true)
+                .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='descrizioneIntervento') Descrizione intervento (max 500 caratteri):
-                    textarea#descrizioneIntervento.form-control(rows='1', maxlength='500')
+                    textarea#descrizioneIntervento.form-control(rows='1', maxlength='500', disabled=true)
             // Foglio diario clinico e complicanze
             .row
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='foglioDiarioClinico') Foglio Diario Clinico (max 500 caratteri):
-                    textarea#foglioDiarioClinico.form-control(rows='1', maxlength='500')
+                    textarea#foglioDiarioClinico.form-control(rows='1', maxlength='500', disabled=true)
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='complicanze') Complicanze (max 500 caratteri):
-                    textarea#complicanze.form-control(rows='1', maxlength='500')
+                    textarea#complicanze.form-control(rows='1', maxlength='500', disabled=true)
             h2.well Foto Intervento
             #fotoIntervento.row
             #myModal.modal.fade(role='dialog')
@@ -180,7 +196,7 @@ block contenutoNav
                         .modal-body
                             img.showimage.img-responsive(src='')
                         .modal-footer
-                            button.btn.btn-default(type='button', data-dismiss='modal') Close
+                            button.btn.btn-default(type='button', data-dismiss='modal') Chiudi
     footer.footer
         .container-fluid
             nav.pull-left
