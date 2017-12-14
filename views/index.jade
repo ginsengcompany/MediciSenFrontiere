@@ -3,53 +3,54 @@ html(lang='it')
     head
         meta(charset='utf-8')
         meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-        title Medici Senza Frontiere
+        title Surgery For Children
         meta(content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0', name='viewport')
         meta(name='viewport', content='width=device-width')
+        link(rel='icon', type='image/png', href='assets/img/favicon-32x32.png')
         link(href='assets/css/animate.min.css', rel='stylesheet')
         link(href='assets/css/pe-icon-7-stroke.css', rel='stylesheet')
-        link(href='//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', rel='stylesheet')
+        link(href='//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
         link(href='assets/css/bootstrap-datetimepicker.css', rel='stylesheet')
         link(href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', rel='stylesheet')
         link(href='http://fonts.googleapis.com/css?family=Roboto:400,700,300', rel='stylesheet', type='text/css')
-        link(href='assets/css/light-bootstrap-dashboard.css', rel='stylesheet')
+        link(href='assets/css/light-bootstrap-dashboard.css?v=1.4.0', rel='stylesheet')
     body
         .wrapper
-            .sidebar(data-color='azure', data-image='assets/img/sidebar-5.jpg')
+            .sidebar(data-color='orange', data-image='assets/img/bitmap.png')
                 .sidebar-wrapper
                     .logo
                         a.simple-text(href='/')
-                            | Medici Senza Frontiere
+                            | Surgery For Children
                     ul.nav
                         block contenutoNav
-                          li
-                              a(href='/user')
-                                  i.pe-7s-user
-                                  p Inserisci Paziente
-                          li
-                              a(href='/informazioni')
-                                  i.pe-7s-info
-                                  p Informazioni Cliniche
-                          li
-                              a(href='/intervento')
-                                  i.pe-7s-note2
-                                  p Intervento
-                          li
-                              a(href='/fotointervento')
-                                  i.pe-7s-camera
-                                  p Foto Intervento
-                          li
-                              a(href='/followup')
-                                  i.pe-7s-refresh
-                                  p Follow Up
-                          li
-                              a(href='/dati')
-                                  i.pe-7s-graph
-                                  p Visualizza Dati
-                          li
-                              a(href='/database')
-                                  i.pe-7s-back-2
-                                  p Esporta Database
+                            li
+                                a(href='/user')
+                                    i.pe-7s-user
+                                    p Inserisci Paziente
+                            li
+                                a(href='/informazioni')
+                                    i.pe-7s-info
+                                    p Informazioni Cliniche
+                            li
+                                a(href='/intervento')
+                                    i.pe-7s-note2
+                                    p Intervento
+                            li
+                                a(href='/fotointervento')
+                                    i.pe-7s-camera
+                                    p Foto Intervento
+                            li
+                                a(href='/followup')
+                                    i.pe-7s-refresh
+                                    p Follow Up
+                            li
+                                a(href='/dati')
+                                    i.pe-7s-graph
+                                    p Visualizza Dati
+                            li
+                                a(href='/database')
+                                    i.pe-7s-back-2
+                                    p Esporta Database
             .main-panel
                 nav.navbar.navbar-default.navbar-fixed
                     .container-fluid
@@ -59,25 +60,38 @@ html(lang='it')
                                 span.icon-bar
                                 span.icon-bar
                                 span.icon-bar
-                            a.navbar-brand(href='/') Home
+                            a.navbar-brand(href='/')
+                                img(src='assets/img/logo_new.png', alt='Logo Onlus', style='width: 145px; height: 35px; margin: 5px,5px,5px,5px;')
+                        .collapse.navbar-collapse
+                            ul.nav.navbar-nav.navbar-left
+
+                            ul.nav.navbar-nav.navbar-right
+                                li
+                                    a(href='http://www.ak12srl.it/')
+                                        img(src='assets/img/ak12.png', alt='Company Logo', width='50', height='25')
+                                li.separator.hidden-lg.hidden-md
                 .content
                     .container-fluid
                         block contenuto
-                footer.footer
+                            .container-fluid
+                                h1.jumbotron Benvenuto!
+                                .row
+                                    .bd-example
+                                        img.img-fluid(style='width: 100%; display: block; margin-left: auto; margin-right: auto;', data-holder-rendered='true', src='assets/img/welcome.svg')
+
+                footer.footer.fixed
                     .container-fluid
-                        nav.pull-left
                         p.copyright.pull-right
                             | © 2017 Medici Senza Frontiere -
-                            a(href='http://www.ak12srl.it/')  Ak12 srl
-
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
-    script(src='assets/js/light-bootstrap-dashboard.js')
-    script(src='//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+                            a(href='http://www.ak12srl.it/') AK-12 srl &nbsp; &nbsp;
+                            img(src='assets/img/ak12.png', alt='Company Logo', width='40', height='20')
+    //script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+    script(src='assets/js/jquery.3.2.1.min.js')
+    script(src='//netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js')
     script(src='assets/js/bootstrap-datetimepicker.min.js')
     script(src='assets/js/bootstrap-checkbox-radio-switch.js')
     script(src='assets/js/bootstrap-notify.js')
+    script(src='assets/js/light-bootstrap-dashboard.js?v=1.4.0')
     block myScript
         script(src="assets/js/controllers/indexController.js")
-
-
