@@ -12,6 +12,7 @@ var now = require('moment');
 var postgres = require("./config/postgres");
 
 var routes = require('./routes/index');
+var inserimentoNuovaCartella = require('./routes/inserimentoNuovaCartella');
 var user = require('./routes/user');
 var dati = require('./routes/dati');
 var database = require('./routes/database');
@@ -20,6 +21,7 @@ var intervento = require('./routes/intervento');
 var fotointervento = require('./routes/fotointervento');
 var followup = require('./routes/followup');
 var inserisciPaziente = require('./app/routes/inserisciPaziente');
+var inserisciCartella = require('./app/routes/inserisciCartella');
 var getPaziente = require('./app/routes/getPaziente');
 var inserisciInformazioni = require('./app/routes/inserisciInformazioni');
 var inserisciIntervento = require('./app/routes/inserisciIntervento');
@@ -67,6 +69,7 @@ app.use('/intervento', intervento);
 app.use('/fotointervento',fotointervento);
 app.use('/followup', followup);
 app.use('/salvaAnagrafica',inserisciPaziente);
+app.use('/salvaCartella',inserisciCartella);
 app.use('/getPaziente',getPaziente);
 app.use('/salvaInformazioni',inserisciInformazioni);
 app.use('/salvaIntervento',inserisciIntervento);
@@ -76,7 +79,7 @@ app.use('/inserisciFollowUp',inserisciFollowUp);
 app.use('/getBackup',getBackup);
 app.use('/getInformazioni',getInformazioni);
 app.use('/getFotoIntervento',getFotoIntervento);
-
+app.use('/inserimentoNuovaCartella',inserimentoNuovaCartella);
 
 
 // catch 404 and forward to error handler
