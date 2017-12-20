@@ -54,7 +54,6 @@ block contenutoNav
                             span.input-group-addon
                                 i.fa.fa-map-marker.fa(aria-hidden='true')
                             input#stMaryHospital.form-control(type='text', placeholder='St. Mary Hospital Lacor')
-            //h2.well Dati paziente:
             // Nome Cognome
             .row
                 .col-sm-4.form-group
@@ -128,7 +127,8 @@ block contenutoNav
                 .col-sm-4.form-group
                     label(for='malaria') Malaria:
                     .cols-sm-10
-                        select#malaria.form-control
+                        select#malaria.form-control(onchange='changeSelectMalaria();')
+                            option
                             option Si
                             option No
                 .col-sm-4.form-group

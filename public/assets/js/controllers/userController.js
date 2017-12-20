@@ -1,9 +1,3 @@
-$(function() {
-    $('#datetimepicker1').datetimepicker();
-    $('#datetimepicker2').datetimepicker();
-    $('#hiddenrow').hide();
-});
-
 var datiAnagrafica = {
     'nome' : undefined,
     'cognome' : undefined,
@@ -20,6 +14,15 @@ var datiAnagrafica = {
     'surgey_children' : undefined,
     'st_mary_hospital' : undefined
 };
+
+document.getElementById('fine').disabled = true;
+document.getElementById("inizio").disabled = true;
+
+$(function() {
+    $('#datetimepicker1').datetimepicker();
+    $('#datetimepicker2').datetimepicker();
+    $('#hiddenrow').hide();
+});
 
 function salvaAnagrafica() {
 
@@ -55,7 +58,8 @@ function salvaAnagrafica() {
         (datiAnagrafica.st_mary_hospital === '' || datiAnagrafica.st_mary_hospital === "" || datiAnagrafica.st_mary_hospital === undefined)
     ) {
         alert('Inserire tutti i Campi!');
-    } else {
+    }
+    else{
 
         $.ajax({
             url: '/salvaAnagrafica',
@@ -70,6 +74,8 @@ function salvaAnagrafica() {
                 $('#sesso').val('');
                 $('#villaggio').val('');
                 $('#distretto').val('');
+                $('#datetimepicker1').data("DateTimePicker").clear();
+                $('#datetimepicker2').data("DateTimePicker").clear();
                 $('#contea').val('');
                 $('#madre').val('');
                 $('#padre').val('');
@@ -85,6 +91,20 @@ function salvaAnagrafica() {
         });
     }
 }
+
+function changeSelectMalaria() {
+    if ($('#malaria').val() === 'Si')
+    {
+        document.getElementById("fine").disabled = false;
+        document.getElementById("inizio").disabled = false;
+    }
+    else
+    {
+        document.getElementById('fine').disabled = true;
+        document.getElementById("inizio").disabled = true;
+    }
+}
+
 
 function salvaDati(){
     salvaAnagrafica();

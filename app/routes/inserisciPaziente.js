@@ -14,13 +14,11 @@ router.post('/',function (req, res, next) {
     var dataFine = datiAnagraficaPaziente.fine.date;
     var dataFin = moment(dataFine).format();
     var queryPostAnagrafica = "INSERT INTO medici_senza_frontiere.tb_anagrafica " +
-        "(nome, cognome, anni, sesso, peso, villaggio, distretto, contea, madre, padre, telefono, malaria, malaria_inizio, malaria_fine,surgey_children,numero_cartella,cartella,st_mary_hospital,foto_paziente)" +
+        "(nome, cognome, sesso, villaggio, distretto, contea, madre, padre, telefono, malaria, malaria_inizio, malaria_fine,surgey_children, st_mary_hospital)" +
         "VALUES (" +
          "'" + datiAnagraficaPaziente.nome               +"', " +
          "'" + datiAnagraficaPaziente.cognome            +"', " +
-         "'" + datiAnagraficaPaziente.anni               +"', " +
          "'" + datiAnagraficaPaziente.sesso              +"', " +
-         "'" + datiAnagraficaPaziente.peso               +"', " +
          "'" + datiAnagraficaPaziente.villaggio          +"', " +
          "'" + datiAnagraficaPaziente.distretto          +"', " +
          "'" + datiAnagraficaPaziente.contea             +"', " +
@@ -31,10 +29,7 @@ router.post('/',function (req, res, next) {
          "'" + dataIni                                   +"', " +
          "'" + dataFin                                   +"', " +
          "'" + datiAnagraficaPaziente.surgey_children    +"', " +
-         "'" + datiAnagraficaPaziente.numero_cartella    +"', " +
-         "'" + datiAnagraficaPaziente.cartella           +"', " +
-         "'" + datiAnagraficaPaziente.st_mary_hospital   +"', " +
-         "'" + datiAnagraficaPaziente.foto_paziente      +"')";
+         "'" + datiAnagraficaPaziente.st_mary_hospital   +"')";
 
        var client = connectionPostgres();
 

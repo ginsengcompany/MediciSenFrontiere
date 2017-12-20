@@ -13,13 +13,13 @@ router.post('/',function (req, res, next) {
     var dataIni = moment(dataInizio).format();
 
     var queryPostIntervento = "INSERT INTO medici_senza_frontiere.tb_intervento " +
-        "(data_intervento, descrizione_intervento, foglio_diario_clinico, complicanze, id_paziente)" +
+        "(data_intervento, descrizione_intervento, foglio_diario_clinico, complicanze, id_cartella)" +
         "VALUES (" +
         "'" + dataIni                                 +"', " +
         "'" + datiIntervento.descrizioneIntervento    +"', " +
         "'" + datiIntervento.foglioDiarioClinico      +"', " +
         "'" + datiIntervento.complicanze              +"', " +
-        "'" + datiIntervento.paziente                 +"')";
+        "'" + datiIntervento.id_cartella                 +"')";
 
     var client = connectionPostgres();
 

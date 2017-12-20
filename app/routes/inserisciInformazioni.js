@@ -15,7 +15,7 @@ router.post('/',function (req, res, next) {
     var dataFin = moment(dataFine).format();
 
     var queryPostInformazioni = "INSERT INTO medici_senza_frontiere.tb_informazioni_cliniche " +
-        "(data_ricovero, data_dimissione, diagnosi, anamnesi, consulenza_chiurugica, consulenza_anestesiologica, id_paziente)" +
+        "(data_ricovero, data_dimissione, diagnosi, anamnesi, consulenza_chiurugica, consulenza_anestesiologica, id_cartella)" +
         "VALUES (" +
         "'" + dataIni                                              +"', " +
         "'" + dataFin                                              +"', " +
@@ -23,7 +23,7 @@ router.post('/',function (req, res, next) {
         "'" + datiInformazioniPaziente.anamnesi                    +"', " +
         "'" + datiInformazioniPaziente.consulenza_chiurugica       +"', " +
         "'" + datiInformazioniPaziente.consulenza_anestesiologica  +"', " +
-        "'" + datiInformazioniPaziente.id_paziente._id                 +"')";
+        "'" + datiInformazioniPaziente.id_cartella                 +"')";
 
     var client = connectionPostgres();
 

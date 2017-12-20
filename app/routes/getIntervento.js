@@ -8,7 +8,15 @@ var connectionPostgres = function () {
 
 router.post('/',function (req, res, next) {
     var datiIntervento = req.body;
-    var queryPostIntervento = "SELECT * FROM medici_senza_frontiere.tb_intervento WHERE id_paziente = ' " + datiIntervento.username +"'";
+    var queryPostIntervento =
+        "SELECT " +
+        "tb_intervento._id AS id_tb_intervento, tb_cartella_clinica._id AS id_tb_cartella, tb_anagrafica._id AS id_tb_anagrafica, tb_intervento.descrizione_intervento, tb_intervento.data_intervento " +
+        "FROM " +
+        "medici_senza_frontiere.tb_cartella_clinica, medici_senza_frontiere.tb_anagrafica, medici_senza_frontiere.tb_intervento " +
+        "WHERE " +
+        "tb_cartella_clinica._id = tb_intervento.id_cartella AND tb_anagrafica._id = tb_cartella_clinica.id_paziente " +
+        "AND " +
+        "tb_anagrafica._id = " + datiIntervento.username + ";";
     var client = connectionPostgres();
 
     var query = client.query(queryPostIntervento);

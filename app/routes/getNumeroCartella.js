@@ -6,11 +6,17 @@ var connectionPostgres = function () {
     return postgresConnection();
 };
 
-router.get('/',function (req, res, next) {
-    var queryGetAnagrafica = "SELECT * FROM medici_senza_frontiere.tb_anagrafica"
+router.post('/',function (req, res, next) {
+
+    var id_cartella = req.body.id_cartella;
+    var queryGetCartella =
+        "SELECT * " +
+        "FROM medici_senza_frontiere.tb_cartella_clinica " +
+        "WHERE tb_cartella_clinica._id = " + id_cartella;
+
     var client = connectionPostgres();
 
-    var query = client.query(queryGetAnagrafica);
+    var query = client.query(queryGetCartella);
 
     query.on("row", function (row, result) {
         result.addRow(row);
@@ -25,3 +31,7 @@ router.get('/',function (req, res, next) {
 });
 
 module.exports = router;
+
+
+
+

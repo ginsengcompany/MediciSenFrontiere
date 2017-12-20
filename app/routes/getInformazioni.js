@@ -8,7 +8,7 @@ var connectionPostgres = function () {
 
 router.post('/',function (req, res, next) {
     var datiInformazioni = req.body;
-    var queryPostInformazioni = "SELECT * FROM medici_senza_frontiere.tb_informazioni_cliniche WHERE id_paziente = ' " + datiInformazioni.username +"'";
+    var queryPostInformazioni = "SELECT * FROM medici_senza_frontiere.tb_informazioni_cliniche WHERE id_cartella = ' " + datiInformazioni.id_cartella +"'";
     var client = connectionPostgres();
 
     var query = client.query(queryPostInformazioni);

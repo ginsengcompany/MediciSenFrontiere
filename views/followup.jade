@@ -40,20 +40,35 @@ block contenutoNav
             h2.well Indagini strumentali e follow up:
             // Indagini radiografiche ecografiche ed ematochimihce
             .row
-                .col-sm-4.form-group
-                    label(for='paziente') Paziente:
+                .col-sm-6.form-group
+                    .row
+                        .col-sm-6.form-group
+                            label(for='paziente') Paziente:
+                            .cols-sm-10
+                                select#paziente.form-control(onchange='changeSelectPaziente();')
+                                    option(value='', selected='selected')
+                    .row
+                        .col-sm-6.form-group#formCartellaClinica
+                            label(for='cartellaClinica') Cartella Clinica:
+                            .cols-sm-10
+                                select#cartellaClinica.form-control(onchange='changeSelectCartellaClinica();')
+                                    option(value='', selected='selected')
+                    .row
+                        .col-sm-6.form-group#formNumeroCartellaClinica
+                            label(for='numeroCartellaClinica') Numero Cartella Clinica:
+                            .cols-sm-10
+                                select#numeroCartellaClinica.form-control(onchange='changeSelectNumeroCartellaClinica();')
+                                    option(value='', selected='selected')
+                .col-sm-6.form-group
+                    label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
                     .cols-sm-10
-                        select#paziente.form-control(onchange='changeSelectPaziente();')
-                            option(value='', selected='selected')
-                .col-sm-4.form-group
+                        img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
+            .row
+                .col-sm-12.form-group
                     label(for='intervento') Intervento:
                     .cols-sm-10
                         select#intervento.form-control(onchange='')
                             option(value='', selected='selected')
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
-                    .cols-sm-10
-                        img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
             .row
                 .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='indaginiRadiografiche') Indagini radiografiche (max 500 caratteri):

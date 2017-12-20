@@ -1,26 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var postgresConnection = require('../../config/postgres');
-var moment = require('moment');
 
 var connectionPostgres = function () {
     return postgresConnection();
 };
 
 router.post('/',function (req, res, next) {
-    var datiFoto = req.body;
-    var id_intervento = datiFoto.id_intervento;
-    var foto_intervento = datiFoto.foto_intervento;
 
-    var queryPostIntervento = "INSERT INTO medici_senza_frontiere.tb_foto_intervento " +
-        "(id_intervento, foto_intervento)" +
-        "VALUES (" +
-        "'" + id_intervento         +"', " +
-        "'" + foto_intervento       +"')";
+    var idPaziente = req.body._id;
+    var queryGetCartella =
+        "SELECT tb_cartella_clinica.numero_cartella, tb_cartella_clinica.cartella, tb_anagrafica._id, tb_cartella_clinica.foto_paziente, tb_cartella_clinica._id  AS id_cartella, tb_cartella_clinica.anni, tb_cartella_clinica.peso "+
+        "FROM medici_senza_frontiere.tb_cartella_clinica, medici_senza_frontiere.tb_anagrafica " +
+        "WHERE tb_anagrafica._id = tb_cartella_clinica.id_paziente AND " +
+        "tb_anagrafica._id = " + idPaziente;
 
     var client = connectionPostgres();
 
-    const query = client.query(queryPostIntervento);
+    var query = client.query(queryGetCartella);
 
     query.on("row", function (row, result) {
         result.addRow(row);
@@ -32,8 +29,6 @@ router.post('/',function (req, res, next) {
         return res.json(final);
         client.end();
     });
-
-
 });
 
 module.exports = router;

@@ -39,12 +39,26 @@ block contenutoNav
         .container-fluid
             h2.well Intervento:
             .row
-                .col-sm-4.form-group
-                    label(for='paziente') Paziente:
-                    .cols-sm-10
-                        select#paziente.form-control(onchange='changeSelectPaziente();')
-                            option(value='', selected='selected')
-                .col-sm-8.form-group
+                .col-sm-6
+                    .row
+                        .col-sm-6.form-group
+                            label(for='paziente') Paziente:
+                            .cols-sm-10
+                                select#paziente.form-control(onchange='changeSelectPaziente();')
+                                    option(value='', selected='selected')
+                    .row
+                        .col-sm-6.form-group#formCartellaClinica
+                            label(for='cartellaClinica') Cartella Clinica:
+                            .cols-sm-10
+                                select#cartellaClinica.form-control(onchange='changeSelectCartellaClinica();')
+                                    option(value='', selected='selected')
+                    .row
+                        .col-sm-6.form-group#formNumeroCartellaClinica
+                            label(for='numeroCartellaClinica') Numero Cartella Clinica:
+                            .cols-sm-10
+                                select#numeroCartellaClinica.form-control(onchange='changeSelectNumeroCartellaClinica();')
+                                    option(value='', selected='selected')
+                .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
                     .cols-sm-10
                         img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
