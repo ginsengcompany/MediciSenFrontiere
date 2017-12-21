@@ -19,7 +19,10 @@ router.get('/',function (req, res, next) {
     query.on("end", function (result) {
         var myOjb = JSON.stringify(result.rows, null, "    ");
         var final = JSON.parse(myOjb);
-        return res.json(final);
+        var jsonFinale = {
+            "data": final
+        };
+        return res.json(jsonFinale);
         client.end();
     });
 });

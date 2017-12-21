@@ -21,7 +21,6 @@
     "pg": "^6.4.1",
     "pg-backup": "latest",
     "serve-favicon": "~2.4.5",
-    "shelljs": "^0.7.8",
     "sys": "0.0.1"
   }
 }

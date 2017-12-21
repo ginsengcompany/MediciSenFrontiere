@@ -41,18 +41,31 @@ block contenutoNav
             .row
                 .col-sm-6
                     .row
-                        .col-sm-6.form-group
-                            label(for='paziente') Paziente:
-                            .cols-sm-10
-                                select#paziente.form-control(onchange='changeSelectPaziente();')
-                                    option(value='', selected='selected')
+                        .col-sm-12.table-responsive
+                            table#tabellaPazienti.table.table-striped.table-bordered(width='100%', cellspacing='0')
+                                thead
+                                    tr
+                                        th id
+                                        th Cognome
+                                        th Nome
+                                        th Sesso
+                                        th Surgey Children
+                                        th St Mary Hospital
+                                        th Villaggio
+                                        th Distretto
+                                        th Contea
+                                        th Madre
+                                        th Padre
+                                        th Telefono
+                                        th Malaria
+                                        th Malaria Inizio
+                                        th Malaria Fine
                     .row
                         .col-sm-6.form-group#formCartellaClinica
                             label(for='cartellaClinica') Cartella Clinica:
                             .cols-sm-10
                                 select#cartellaClinica.form-control(onchange='changeSelectCartellaClinica();')
                                     option(value='', selected='selected')
-                    .row
                         .col-sm-6.form-group#formNumeroCartellaClinica
                             label(for='numeroCartellaClinica') Numero Cartella Clinica:
                             .cols-sm-10
@@ -62,36 +75,34 @@ block contenutoNav
                     label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
                     .cols-sm-10
                         img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
-            // Data ricovero e dimissione
-            .row
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='inizioRicovero') Data di ricovero:
-                    #datetimepickerInizioRicovero.input-group.date
-                        input#inizioRicovero.form-control(type='text')
-                        span.input-group-addon
-                            span.glyphicon-calendar.glyphicon
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='fineRicovero') Data di dimissione:
-                    #datetimepickerFineRicovero.input-group.date
-                        input#fineRicovero.form-control(type='text')
-                        span.input-group-addon
-                            span.glyphicon-calendar.glyphicon
-            // Diagnosi Anamnesi
-            .row
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='diagnosi') Diagnosi (max 500 caratteri):
-                    textarea#diagnosi.form-control(rows='1', maxlength='500')
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='anamnesi') Anamnesi (max 500 caratteri):
-                    textarea#anamnesi.form-control(rows='1', maxlength='500')
-            // Consulenza chirurgica ed anestesiologica
-            .row
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='consulenzaChirurgica') Consulenza chirurgica (max 500 caratteri):
-                    textarea#consulenzaChirurgica.form-control(rows='1', maxlength='500')
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='consulenzaAnestesiologica') Consulenza anestesiologica (max 500 caratteri):
-                    textarea#consulenzaAnestesiologica.form-control(rows='1', maxlength='500')
+                    .row
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='inizioRicovero') Data di ricovero:
+                            #datetimepickerInizioRicovero.input-group.date
+                                input#inizioRicovero.form-control(type='text')
+                                span.input-group-addon
+                                    span.glyphicon-calendar.glyphicon
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='fineRicovero') Data di dimissione:
+                            #datetimepickerFineRicovero.input-group.date
+                                input#fineRicovero.form-control(type='text')
+                                span.input-group-addon
+                                    span.glyphicon-calendar.glyphicon
+                    .row
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='diagnosi') Diagnosi (max 500 caratteri):
+                            textarea#diagnosi.form-control(rows='1', maxlength='500')
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='anamnesi') Anamnesi (max 500 caratteri):
+                            textarea#anamnesi.form-control(rows='1', maxlength='500')
+                    .row
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='consulenzaChirurgica') Consulenza chirurgica (max 500 caratteri):
+                            textarea#consulenzaChirurgica.form-control(rows='1', maxlength='500')
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='consulenzaAnestesiologica') Consulenza anestesiologica (max 500 caratteri):
+                            textarea#consulenzaAnestesiologica.form-control(rows='1', maxlength='500')
+
         br
         .container-fluid
             button.btn.btn-primary.pull-right(type='submit', onclick='salvaDati();') Submit

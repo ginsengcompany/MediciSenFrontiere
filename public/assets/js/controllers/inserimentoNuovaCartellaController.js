@@ -69,22 +69,129 @@ function visualizzaCamera(){
     $('#hiddenrow').show();
 }
 
-$.ajax({
-    url: '/getPaziente',
-    type: 'GET',
-    contentType: 'application/json',
-    success: function(data) {
-        var combopazienti = data;
-        var select = document.getElementById("paziente");
-        pazienti = combopazienti;
-        console.log(pazienti);
-        for(index in combopazienti) {
-            select.options[select.options.length] = new Option(combopazienti[index].cognome + " " + combopazienti[index].nome, JSON.stringify(combopazienti[index]));
-        }
+function render (data) {
+    var date = new Date(data);
+    var month = date.getMonth() + 1;
+    return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+}
+
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+        '<td>Surgey Children:</td>'+
+        '<td>'+d.surgey_children+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>St Mary Hospital:</td>'+
+        '<td>'+d.st_mary_hospital+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Villaggio:</td>'+
+        '<td>'+d.villaggio+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Distretto:</td>'+
+        '<td>'+d.distretto+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Contea:</td>'+
+        '<td>'+d.contea+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>madre:</td>'+
+        '<td>'+d.madre+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Padre:</td>'+
+        '<td>'+d.padre+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Telefono:</td>'+
+        '<td>'+d.telefono+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Malaria:</td>'+
+        '<td>'+d.malaria+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Data Inizio Malaria:</td>'+
+        '<td>'+render(d.malaria_inizio)+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Data Fine Malaria:</td>'+
+        '<td>'+render(d.malaria_fine)+'</td>'+
+        '</tr>'+
+        '</table>';
+}
+
+$(document).ready(function() {
+
+    tabPazienti = $('#tabellaPazienti').DataTable( {
+        ajax: "/getPaziente",
+        responsive: true,
+        ajaxSettings: {
+            method: "GET",
+            cache: false
         },
-    faliure: function(data) {
-        indicePazienteJSON = "";
-    }
+        columns: [
+            {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
+            { "data": "cognome" },
+            { "data": "nome" },
+            { "data": "sesso"},
+            { "data": "surgey_children", "visible": false },
+            { "data": "st_mary_hospital", "visible": false },
+            { "data": "villaggio", "visible": false },
+            { "data": "distretto", "visible": false },
+            { "data": "contea", "visible": false },
+            { "data": "madre", "visible": false },
+            { "data": "padre", "visible": false },
+            { "data": "telefono", "visible": false },
+            { "data": "malaria", "visible": false },
+            { "data": "malaria_inizio" , "render": function (data) {
+                var date = new Date(data);
+                var month = date.getMonth() + 1;
+                return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+            }, "visible": false},
+            { "data": "malaria_fine" , "render": function (data) {
+                var date = new Date(data);
+                var month = date.getMonth() + 1;
+                return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+            }, "visible": false}
+        ]
+    } );
+
+    $('#tabellaPazienti tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            tabPazienti.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+
+    $('#tabellaPazienti tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = tabPazienti.row( tr );
+
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+
 });
 
 function changeSelectPaziente(){
@@ -101,15 +208,19 @@ function encodeImageFileAsURL(element) {
     reader.readAsDataURL(file);
 }
 
-
 function salvaCartella() {
+
+    var ids1 = $.map(tabPazienti.rows('.selected').data(), function (item) {
+        return item;
+    });
+    arrayPaziente = ids1;
 
     datiCartella.peso = $('#peso').val();
     datiCartella.anni = $('#anni').val();
     datiCartella.cartella = $('#cartellaClinica').val();
     datiCartella.numero_cartella = $('#numeroCartella').val();
 
-    if(indicePazienteJSON === '' || indicePazienteJSON === "" || indicePazienteJSON === undefined)
+    if(arrayPaziente.length<0)
     {
         alert('Non sono presenti pazienti a cui aprire una cartela clinica!');
     }
@@ -123,7 +234,7 @@ function salvaCartella() {
         alert('Inserire tutti i CAMPI!');
     }else
         {
-            datiCartella.id_paziente = indicePazienteJSON._id;
+            datiCartella.id_paziente = arrayPaziente[0]._id;
             $.ajax({
                 url: '/salvaCartella',
                 type: 'POST',

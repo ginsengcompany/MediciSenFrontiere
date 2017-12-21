@@ -41,18 +41,31 @@ block contenutoNav
             .row
                 .col-sm-6
                     .row
-                        .col-sm-6.form-group
-                            label(for='paziente') Paziente:
-                            .cols-sm-10
-                                select#paziente.form-control(onchange='changeSelectPaziente();')
-                                    option(value='', selected='selected')
+                        .col-sm-12.table-responsive
+                            table#tabellaPazienti.table.table-striped.table-bordered(width='100%', cellspacing='0')
+                                thead
+                                    tr
+                                        th id
+                                        th Cognome
+                                        th Nome
+                                        th Sesso
+                                        th Surgey Children
+                                        th St Mary Hospital
+                                        th Villaggio
+                                        th Distretto
+                                        th Contea
+                                        th Madre
+                                        th Padre
+                                        th Telefono
+                                        th Malaria
+                                        th Malaria Inizio
+                                        th Malaria Fine
                     .row
                         .col-sm-6.form-group#formCartellaClinica
                             label(for='cartellaClinica') Cartella Clinica:
                             .cols-sm-10
                                 select#cartellaClinica.form-control(onchange='changeSelectCartellaClinica();')
                                     option(value='', selected='selected')
-                    .row
                         .col-sm-6.form-group#formNumeroCartellaClinica
                             label(for='numeroCartellaClinica') Numero Cartella Clinica:
                             .cols-sm-10
@@ -62,25 +75,24 @@ block contenutoNav
                     label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
                     .cols-sm-10
                         img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
-            // Intervendo e descrizione
-            .row
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='dataIntervento') Data intervento:
-                    #datetimepickerDataIntervento.input-group.date
-                        input#dataIntervento.form-control(type='text')
-                        span.input-group-addon
-                            span.glyphicon-calendar.glyphicon
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='descrizioneIntervento') Descrizione intervento (max 500 caratteri):
-                    textarea#descrizioneIntervento.form-control(rows='1', maxlength='500')
-            // Foglio diario clinico e complicanze
-            .row
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='foglioDiarioClinico') Foglio Diario Clinico (max 500 caratteri):
-                    textarea#foglioDiarioClinico.form-control(rows='1', maxlength='500')
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='complicanze') Complicanze (max 500 caratteri):
-                    textarea#complicanze.form-control(rows='1', maxlength='500')
+                    .row
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='dataIntervento') Data intervento:
+                            #datetimepickerDataIntervento.input-group.date
+                                input#dataIntervento.form-control(type='text')
+                                span.input-group-addon
+                                    span.glyphicon-calendar.glyphicon
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='descrizioneIntervento') Descrizione intervento (max 500 caratteri):
+                            textarea#descrizioneIntervento.form-control(rows='1', maxlength='500')
+                    .row
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='foglioDiarioClinico') Foglio Diario Clinico (max 500 caratteri):
+                            textarea#foglioDiarioClinico.form-control(rows='1', maxlength='500')
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='complicanze') Complicanze (max 500 caratteri):
+                            textarea#complicanze.form-control(rows='1', maxlength='500')
+
         br
         .container-fluid
             button.btn.btn-primary.pull-right(type='submit', onclick='salvaDati();') Submit

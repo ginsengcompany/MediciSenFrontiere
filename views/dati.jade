@@ -41,18 +41,31 @@ block contenutoNav
             .row
                 .col-sm-6
                     .row
-                        .col-sm-6.form-group
-                            label(for='paziente') Paziente:
-                            .cols-sm-10
-                                select#paziente.form-control(onchange='changeSelectPaziente();')
-                                    option(value='', selected='selected')
+                        .col-sm-12.table-responsive
+                            table#tabellaPazienti.table.table-striped.table-bordered(width='100%', cellspacing='0')
+                                thead
+                                    tr
+                                        th id
+                                        th Cognome
+                                        th Nome
+                                        th Sesso
+                                        th Surgey Children
+                                        th St Mary Hospital
+                                        th Villaggio
+                                        th Distretto
+                                        th Contea
+                                        th Madre
+                                        th Padre
+                                        th Telefono
+                                        th Malaria
+                                        th Malaria Inizio
+                                        th Malaria Fine
                     .row
                         .col-sm-6.form-group#formCartellaClinica
                             label(for='cartellaClinica') Cartella Clinica:
                             .cols-sm-10
                                 select#cartellaClinica.form-control(onchange='changeSelectCartellaClinica();')
                                     option(value='', selected='selected')
-                    .row
                         .col-sm-6.form-group#formNumeroCartellaClinica
                             label(for='numeroCartellaClinica') Numero Cartella Clinica:
                             .cols-sm-10
@@ -62,132 +75,20 @@ block contenutoNav
                     label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
                     .cols-sm-10
                         img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
-            // Anni Sesso Peso
-            .row
-                .col-sm-4.form-group
-                    label(for='sesso') Sesso:
-                    .cols-sm-10
-                        select#sesso.form-control(disabled=true)
-                            option
-                            option M
-                            option F
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='anni') Anni
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.fa.fa-calendar.fa(aria-hidden='true')
-                            input#anni.form-control(type='number', placeholder='Anni', disabled=true)
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='peso') Peso (in kg)
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.fa.fa-balance-scale.fa(aria-hidden='true')
-                            input#peso.form-control(type='number', placeholder='Peso', disabled=true)
-            // Villaggio Distretto Contea
-            .row
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='villaggio') Villaggio
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.fa.fa-map-marker.fa(aria-hidden='true')
-                            input#villaggio.form-control(type='text', placeholder='Villaggio', disabled=true)
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='distretto') Distretto
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.fa.fa-map-marker.fa(aria-hidden='true')
-                            input#distretto.form-control(type='text', placeholder='Distretto', disabled=true)
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='contea') Contea
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.fa.fa-map-marker.fa(aria-hidden='true')
-                            input#contea.form-control(type='text', placeholder='Contea', disabled=true)
-            // Madre Padre Telefono
-            .row
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='madre') Madre
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.fa.fa-female.fa(aria-hidden='true')
-                            input#madre.form-control(type='text', placeholder='Madre', disabled=true)
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='padre') Padre
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.fa.fa-male.fa(aria-hidden='true')
-                            input#padre.form-control(type='text', placeholder='Padre', disabled=true)
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='telefono') Telefono
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.fa.fa-phone.fa(aria-hidden='true')
-                            input#telefono.form-control(type='text', placeholder='Telefono', disabled=true)
-            // Malaria e periodo
-            .row
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='malaria') Malaria
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.fa.fa-hospital-o.fa(aria-hidden='true')
-                            input#malaria.form-control(type='text', placeholder='Malaria', disabled=true)
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='dalGiorno') Dal giorno:
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.glyphicon.glyphicon-calendar(aria-hidden='true')
-                            input#dalGiorno.form-control(type='text', placeholder='Dal giorno', disabled=true)
-                .col-sm-4.form-group
-                    label.cols-sm-2.control-label(for='alGiorno') Al giorno:
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.glyphicon.glyphicon-calendar(aria-hidden='true')
-                            input#alGiorno.form-control(type='text', placeholder='Al giorno', disabled=true)
             h2.well Visualizzazione Informazioni Cliniche
             // Data ricovero
             .row
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='dataRicovero') Data di ricovero:
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.glyphicon.glyphicon-calendar(aria-hidden='true')
-                            input#dataRicovero.form-control(type='text', placeholder='Data Ricovero', disabled=true)
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='dataDimissione') Data di dimissione:
-                    .cols-sm-10
-                        .input-group
-                            span.input-group-addon
-                                i.glyphicon.glyphicon-calendar(aria-hidden='true')
-                            input#dataDimissione.form-control(type='text', placeholder='Data Dimissione', disabled=true)
-            // Diagnosi Anamnesi
-            .row
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='diagnosi') Diagnosi (max 500 caratteri):
-                    textarea#diagnosi.form-control(rows='1', maxlength='500', disabled=true)
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='anamnesi') Anamnesi (max 500 caratteri):
-                    textarea#anamnesi.form-control(rows='1', maxlength='500', disabled=true)
-            // Consulenza chirurgica ed anestesiologica
-            .row
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='consulenzaChirurgica') Consulenza chirurgica (max 500 caratteri):
-                    textarea#consulenzaChirurgica.form-control(rows='1', maxlength='500', disabled=true)
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='consulenzaAnestesiologica')
-                        | Consulenza anestesiologica (max 500 caratteri):
-                    textarea#consulenzaAnestesiologica.form-control(rows='1', maxlength='500', disabled=true)
+                .col-sm-12.table-responsive
+                    table#tabellaInformazioni.table.table-striped.table-bordered(width='100%', cellspacing='0')
+                        thead
+                            tr
+                                th Data Ricovero
+                                th Data Dimissione
+                                th Diagnosi
+                                th Anamnesi
+                                th Consulenza Chiurugica
+                                th Consulenza Anestesiologica
+
             h2.well Intervento e Descrizione
             // Intervendo e descrizione
             .row
@@ -214,15 +115,19 @@ block contenutoNav
                 .col-sm-6.form-group
                     label.cols-sm-2.control-label(for='complicanze') Complicanze (max 500 caratteri):
                     textarea#complicanze.form-control(rows='1', maxlength='500', disabled=true)
+            h2.well FollowUp Intervento
+            .row
+                .col-sm-12.table-responsive
+                    table#tabellaFollowUp.table.table-striped.table-bordered(width='100%', cellspacing='0')
+                        thead
+                            tr
+                                th Indagini Ecografiche
+                                th Indagini Radiografiche
+                                th Indagini Ematochimiche
+                                th Follow Up
+                                th Anni Precedenti
             h2.well Foto Intervento
             #fotoIntervento.row
-            #myModal.modal.fade(role='dialog')
-                .modal-dialog
-                    .modal-content
-                        .modal-body
-                            img.showimage.img-responsive(src='')
-                        .modal-footer
-                            button.btn.btn-default(type='button', data-dismiss='modal') Chiudi
     footer.footer
         .container-fluid
             nav.pull-left

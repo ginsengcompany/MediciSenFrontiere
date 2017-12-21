@@ -1,5 +1,7 @@
 var pazienti, cartellaClinica, indicePaziente, indicePazienteJSON, indiceNumeroCartella, indiceCartella;
 
+indicePazienteJSON = { "_id":undefined};
+
 var datiIntervento = {
     'dataIntervento' : '',
     'descrizioneIntervento' : '',
@@ -10,7 +12,7 @@ var datiIntervento = {
 
 var idCartella = {
     'id_cartella' : undefined
-}
+};
 
 
 document.getElementById("formCartellaClinica").readOnly = true;
@@ -19,26 +21,144 @@ $(function() {
     $('#datetimepickerDataIntervento').datetimepicker();
 });
 
-$.ajax({
-    url: '/getPaziente',
-    type: 'GET',
-    contentType: 'application/json',
-    success: function(data) {
-        var combopazienti = data;
-        var select = document.getElementById("paziente");
-        pazienti = combopazienti;
-        document.getElementById("formCartellaClinica").readOnly = false;
-        for(index in combopazienti) {
-            select.options[select.options.length] = new Option(combopazienti[index].cognome + " " + combopazienti[index].nome, JSON.stringify(combopazienti[index]));
+function render (data) {
+    var date = new Date(data);
+    var month = date.getMonth() + 1;
+    return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+}
+
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+        '<td>Surgey Children:</td>'+
+        '<td>'+d.surgey_children+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>St Mary Hospital:</td>'+
+        '<td>'+d.st_mary_hospital+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Villaggio:</td>'+
+        '<td>'+d.villaggio+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Distretto:</td>'+
+        '<td>'+d.distretto+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Contea:</td>'+
+        '<td>'+d.contea+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>madre:</td>'+
+        '<td>'+d.madre+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Padre:</td>'+
+        '<td>'+d.padre+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Telefono:</td>'+
+        '<td>'+d.telefono+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Malaria:</td>'+
+        '<td>'+d.malaria+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Data Inizio Malaria:</td>'+
+        '<td>'+render(d.malaria_inizio)+'</td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td>Data Fine Malaria:</td>'+
+        '<td>'+render(d.malaria_fine)+'</td>'+
+        '</tr>'+
+        '</table>';
+}
+
+$(document).ready(function() {
+
+    tabPazienti = $('#tabellaPazienti').DataTable( {
+        ajax: "/getPaziente",
+        responsive: true,
+        ajaxSettings: {
+            method: "GET",
+            cache: false
+        },
+        columns: [
+            {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           null,
+                "defaultContent": ''
+            },
+            { "data": "cognome" },
+            { "data": "nome" },
+            { "data": "sesso"},
+            { "data": "surgey_children", "visible": false },
+            { "data": "st_mary_hospital", "visible": false },
+            { "data": "villaggio", "visible": false },
+            { "data": "distretto", "visible": false },
+            { "data": "contea", "visible": false },
+            { "data": "madre", "visible": false },
+            { "data": "padre", "visible": false },
+            { "data": "telefono", "visible": false },
+            { "data": "malaria", "visible": false },
+            { "data": "malaria_inizio" , "render": function (data) {
+                var date = new Date(data);
+                var month = date.getMonth() + 1;
+                return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+            }, "visible": false},
+            { "data": "malaria_fine" , "render": function (data) {
+                var date = new Date(data);
+                var month = date.getMonth() + 1;
+                return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+            }, "visible": false}
+        ]
+    } );
+
+    $('#tabellaPazienti tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+            ids1 = $.map(tabPazienti.rows('.selected').data(), function (item) {
+                return item;
+            });
+            arrayPaziente = ids1;
+            changeSelectPaziente(arrayPaziente);
         }
-    },
-    faliure: function(data) {
-        indicePazienteJSON = "";
-    }
+        else {
+            tabPazienti.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            ids1 = $.map(tabPazienti.rows('.selected').data(), function (item) {
+                return item;
+            });
+            arrayPaziente = ids1;
+            changeSelectPaziente(arrayPaziente);
+
+        }
+    } );
+
+    $('#tabellaPazienti tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = tabPazienti.row( tr );
+
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+
 });
 
-function changeSelectPaziente(){
-    if ($('#paziente').val() === '' || $('#paziente').val() === undefined || $('#paziente').val() === "")
+function changeSelectPaziente(arrayPaziente){
+    if (arrayPaziente.length<0)
     {
         document.getElementById('fotoProfilo').style.display = 'none';
         return;
@@ -48,8 +168,8 @@ function changeSelectPaziente(){
         document.getElementById('cartellaClinica').options.length = 0;
         document.getElementById('numeroCartellaClinica').options.length = 0;
         document.getElementById('fotoProfilo').style.display = 'none';
-        indicePaziente = $('#paziente').val();
-        indicePazienteJSON = JSON.parse(indicePaziente);
+        indicePaziente = arrayPaziente[0]._id;
+        indicePazienteJSON._id = indicePaziente;
 
         $.ajax({
             url: '/getCartellaPaziente',
@@ -58,7 +178,6 @@ function changeSelectPaziente(){
             contentType: 'application/json',
             success: function (data) {
                 var comboCartella = data;
-                console.log(comboCartella);
                 var selectCartella = document.getElementById("cartellaClinica");
                 selectCartella.options[selectCartella.options.length] = new Option('');
                 cartellaClinica = comboCartella;
@@ -76,34 +195,33 @@ function changeSelectPaziente(){
 }
 
 function changeSelectCartellaClinica() {
+
+    document.getElementById("numeroCartellaClinica").options.length=0;
+
+    document.getElementById('fotoProfilo').style.display = 'none';
+
     $('#numeroCartellaClinica').val('');
     indiceCartella = JSON.parse($('#cartellaClinica').val());
+    idCartella.id_cartella = indiceCartella.id_cartella;
 
-    if ($('#numeroCartellaClinica').val() === ''){
-        return;
-    }else{
-        indiceNumeroCartella = JSON.parse($('#numeroCartellaClinica').val());
-        idCartella.id_cartella = indiceCartella.id_cartella;
+    $.ajax({
+        url: '/getNumeroCartella',
+        type: 'POST',
+        data: JSON.stringify(idCartella),
+        contentType: 'application/json',
+        success: function(data) {
 
-        $.ajax({
-            url: '/getNumeroCartella',
-            type: 'POST',
-            data: JSON.stringify(idCartella),
-            contentType: 'application/json',
-            success: function(data) {
-                document.getElementById('fotoProfilo').style.display = 'block';
-                document.getElementById('fotoProfilo').src = data[0].foto_paziente.replace(/"/g, '');
-                var select = document.getElementById("numeroCartellaClinica");
-                select.options[select.options.length] = new Option('');
-                for(index in data) {
-                    select.options[select.options.length] = new Option(data[index].numero_cartella, JSON.stringify(data[index]));
-                }
-            },
-            faliure: function(data) {
-                display.alert('Errore nel prelievo delle informazioni!');
+            var select = document.getElementById("numeroCartellaClinica");
+            select.options[select.options.length] = new Option('');
+            for(index in data) {
+                select.options[select.options.length] = new Option(data[index].numero_cartella, JSON.stringify(data[index]));
             }
-        });
-    }
+        },
+        faliure: function(data) {
+            display.alert('Errore nel prelievo delle informazioni!');
+        }
+    });
+
 }
 
 function changeSelectNumeroCartellaClinica() {
@@ -111,6 +229,7 @@ function changeSelectNumeroCartellaClinica() {
     document.getElementById('fotoProfilo').style.display = 'block';
     document.getElementById('fotoProfilo').src = indiceCartella.foto_paziente.replace(/"/g, '');
 }
+
 function salvaDati() {
 
     datiIntervento.dataIntervento = $('#datetimepickerDataIntervento').data();

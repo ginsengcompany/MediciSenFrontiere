@@ -35,6 +35,7 @@ var inserisciFollowUp = require('./app/routes/inserisciFollowUp');
 var getBackup = require('./app/routes/getBackup');
 var getInformazioni = require('./app/routes/getInformazioni');
 var getFotoIntervento = require ('./app/routes/getFotoIntervento');
+var getFollowUp = require('./app/routes/getFollowUp');
 
 var app = express();
 var con = postgres(app);
@@ -45,6 +46,7 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname,'public/assets/img','favicon.ico')));
 
 app.use(logger('dev'));
 app.use(cookieParser());
@@ -88,6 +90,7 @@ app.use('/getBackup',getBackup);
 app.use('/getInformazioni',getInformazioni);
 app.use('/getFotoIntervento',getFotoIntervento);
 app.use('/inserimentoNuovaCartella',inserimentoNuovaCartella);
+app.use('/getFollowUp',getFollowUp);
 
 
 // catch 404 and forward to error handler

@@ -8,6 +8,12 @@ function salvaDati(){
         contentType: 'application/json',
         success: function(data) {
 
+            if(data.errore){
+                alert('DataBase non Esportato')
+            }else {
+                alert('DataBase Esportato con successo nella cartella databaseBackup!')
+            }
+
         },
         faliure: function(data) {
         }
