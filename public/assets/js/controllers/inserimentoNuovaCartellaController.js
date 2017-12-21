@@ -11,9 +11,14 @@ var datiCartella = {
 };
 
 $(function() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = today.getMonth()+1; //January is 0!
+    var valueMonth=yyyy+'-'+mm;
     $('#datetimepicker1').datetimepicker();
     $('#datetimepicker2').datetimepicker();
     $('#hiddenrow').hide();
+    $('#cartellaClinica').val(valueMonth);
 });
 
 $(document).ready(function() {
@@ -242,7 +247,10 @@ function salvaCartella() {
                 cache: false,
                 contentType: 'application/json',
                 success: function (data) {
-                    alert('Inserimento effettuato con Successo!');
+                    if(data.errore){
+                        alert(data.errore);
+                    }
+                    else alert('Inserimento effettuato con Successo!');
                     $('#anni').val('');
                     $('#peso').val('');
                     $('#cartellaClinica').val('');
