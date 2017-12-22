@@ -105,7 +105,6 @@ function changeSelectMalaria() {
     }
 }
 
-
 function salvaDati(){
     salvaAnagrafica();
 }

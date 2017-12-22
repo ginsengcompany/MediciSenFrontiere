@@ -1,4 +1,4 @@
-var pazienti, indicePaziente, indicePazienteJSON;
+var indicePaziente, indicePazienteJSON;
 var video, webcamStream;
 var canvas, ctx;
 

@@ -1,4 +1,4 @@
-var pazienti, cartellaClinica, indicePaziente, indicePazienteJSON, indiceNumeroCartella, indiceCartella;
+var cartellaClinica, indicePaziente, indicePazienteJSON, indiceCartella;
 
 indicePazienteJSON = { "_id":undefined};
 

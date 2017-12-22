@@ -2,18 +2,8 @@ var cartellaClinica, indicePaziente, indicePazienteJSON, indiceCartella;
 
 indicePazienteJSON = { "_id":undefined};
 
-
 var datiIntervento = {
     'username' : undefined
-};
-
-var datiFollowup = {
-    'indagini_radiografiche' : undefined,
-    'indagini_ecografiche' : undefined,
-    'indegini_ematochimiche' : undefined,
-    'follow_up' : undefined,
-    'anni_precedenti' : undefined,
-    'id_intervento' : undefined
 };
 
 var idCartella = {
