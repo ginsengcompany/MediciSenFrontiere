@@ -25,14 +25,14 @@ function setTabInformazioni(indiceCartella) {
         },
         columns: [
             { "data": "data_ricovero" , "render": function (data) {
-                var date = new Date(data);
-                var month = date.getMonth() + 1;
-                return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+                function pad(s) { return (s < 10) ? '0' + s : s; }
+                var d = new Date(data);
+                return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
             }},
             { "data": "data_dimissione" , "render": function (data) {
-                var date = new Date(data);
-                var month = date.getMonth() + 1;
-                return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+                function pad(s) { return (s < 10) ? '0' + s : s; }
+                var d = new Date(data);
+                return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
             }},
             { "data": "diagnosi"},
             { "data": "anamnesi"},
@@ -44,7 +44,8 @@ function setTabInformazioni(indiceCartella) {
 }
 
 function setTabFollowUp(indiceIntervento) {
-
+	
+	
     tabFollowUp = $('#tabellaFollowUp').DataTable( {
         responsive: true,
         bDestroy: true,
@@ -67,10 +68,10 @@ function setTabFollowUp(indiceIntervento) {
 
 }
 
-function render (data) {
-    var date = new Date(data);
-    var month = date.getMonth() + 1;
-    return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+function convertDate(inputFormat) {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(inputFormat);
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
 }
 
 function format ( d ) {
@@ -114,11 +115,11 @@ function format ( d ) {
         '</tr>'+
         '<tr>'+
         '<td>Data Inizio Malaria:</td>'+
-        '<td>'+render(d.malaria_inizio)+'</td>'+
+        '<td>'+convertDate(d.malaria_inizio)+'</td>'+
         '</tr>'+
         '<tr>'+
         '<td>Data Fine Malaria:</td>'+
-        '<td>'+render(d.malaria_fine)+'</td>'+
+        '<td>'+convertDate(d.malaria_fine)+'</td>'+
         '</tr>'+
         '</table>';
 }
@@ -152,14 +153,14 @@ $(document).ready(function() {
             { "data": "telefono", "visible": false },
             { "data": "malaria", "visible": false },
             { "data": "malaria_inizio" , "render": function (data) {
-                var date = new Date(data);
-                var month = date.getMonth() + 1;
-                return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+                function pad(s) { return (s < 10) ? '0' + s : s; }
+                var d = new Date(data);
+                return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
             }, "visible": false},
             { "data": "malaria_fine" , "render": function (data) {
-                var date = new Date(data);
-                var month = date.getMonth() + 1;
-                return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+                function pad(s) { return (s < 10) ? '0' + s : s; }
+                var d = new Date(data);
+                return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
             }, "visible": false}
         ]
     } );
@@ -241,12 +242,44 @@ function changeSelectPaziente(arrayPaziente){
 }
 
 function changeSelectCartellaClinica() {
+	
+	var indice = $('#cartellaClinica').val();
+	
+	if(!indice){
+		
+	document.getElementById("numeroCartellaClinica").options.length=0;
 
+    document.getElementById('fotoProfilo').style.display = 'none';
+
+    $('#numeroCartellaClinica').val('');
+	document.getElementById('dataIntervento').value = "";
+    document.getElementById('descrizioneIntervento').value = "";
+    document.getElementById('foglioDiarioClinico').value = "";
+    document.getElementById('complicanze').value = "";
+	
+	$('#tabellaFollowUp').dataTable().fnClearTable();
+	
+	$('#tabellaInformazioni').dataTable().fnClearTable();
+	document.getElementById("fotoIntervento").innerHTML="";
+		
+	}
+	else if(indice){
+		
     document.getElementById("numeroCartellaClinica").options.length=0;
 
     document.getElementById('fotoProfilo').style.display = 'none';
 
     $('#numeroCartellaClinica').val('');
+	document.getElementById('dataIntervento').value = "";
+    document.getElementById('descrizioneIntervento').value = "";
+    document.getElementById('foglioDiarioClinico').value = "";
+    document.getElementById('complicanze').value = "";
+	
+	$('#tabellaFollowUp').dataTable().fnClearTable();
+	
+	$('#tabellaInformazioni').dataTable().fnClearTable();
+	document.getElementById("fotoIntervento").innerHTML="";		
+
     indiceCartella = JSON.parse($('#cartellaClinica').val());
     idCartella.id_cartella = indiceCartella.id_cartella;
 
@@ -267,6 +300,8 @@ function changeSelectCartellaClinica() {
             display.alert('Errore nel prelievo delle informazioni!');
         }
     });
+
+	}
 
 }
 
@@ -313,11 +348,27 @@ function changeSelectNumeroCartellaClinica() {
 }
 
 function changeSelectIntervento(){
+	
 
     var indice = $('#intervento').val();
-    var indice2 = JSON.parse(indice);
-
-    document.getElementById('dataIntervento').value = indice2.data_intervento;
+    
+	
+	if(!indice){
+		
+	document.getElementById('dataIntervento').value = "";
+    document.getElementById('descrizioneIntervento').value = "";
+    document.getElementById('foglioDiarioClinico').value = "";
+    document.getElementById('complicanze').value = "";
+	
+	$('#tabellaFollowUp').dataTable().fnClearTable();
+	document.getElementById("fotoIntervento").innerHTML="";
+		
+	}
+	else if(indice){
+		
+		var indice2 = JSON.parse(indice);
+		
+		 document.getElementById('dataIntervento').value = indice2.data_intervento;
     document.getElementById('descrizioneIntervento').value = indice2.descrizione_intervento;
     document.getElementById('foglioDiarioClinico').value = indice2.foglio_diario_clinico;
     document.getElementById('complicanze').value = indice2.complicanze;
@@ -333,6 +384,8 @@ function changeSelectIntervento(){
         cache: false,
         contentType: 'application/json',
         success: function(data) {
+			
+			document.getElementById("fotoIntervento").innerHTML="";
 
             fotoIntervento = data;
             var numeroImmaginiDaQuery = fotoIntervento.length;
@@ -366,6 +419,9 @@ function changeSelectIntervento(){
         faliure: function(data) {
         }
     });
+		
+	}
+ 
 }
 
 function formatDate(date) {
@@ -383,6 +439,6 @@ function formatDate(date) {
     var minutes = date.getMinutes();
     var second = date.getSeconds();
 
-    return day + ' ' + monthNames[monthIndex] + ' ' + year + ' '+hours+':'+minutes+':'+second;
+    return day + ' ' + monthNames[monthIndex] + ' ' + year;
 }
 

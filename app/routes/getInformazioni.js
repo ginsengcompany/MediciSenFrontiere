@@ -23,8 +23,8 @@ router.post('/',function (req, res, next) {
         var jsonFinale = {
             "data": final
         };
+		client.end();
         return res.json(jsonFinale);
-        client.end();
     });
 
 

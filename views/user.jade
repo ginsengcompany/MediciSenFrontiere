@@ -48,12 +48,12 @@ block contenutoNav
                                 i.fa.fa-hospital-o.fa(aria-hidden='true')
                             input#surgeyChildren.form-control(type='text', placeholder='Surgey for children')
                 .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='stMaryHospital') St. Mary Hospital Lacor
+                    label.cols-sm-2.control-label(for='stMaryHospital') Struttura Ospite
                     .cols-sm-10
                         .input-group
                             span.input-group-addon
                                 i.fa.fa-map-marker.fa(aria-hidden='true')
-                            input#stMaryHospital.form-control(type='text', placeholder='St. Mary Hospital Lacor')
+                            input#stMaryHospital.form-control(type='text', placeholder='Es: St. Mary Hospital Lacor')
             // Nome Cognome
             .row
                 .col-sm-4.form-group
@@ -121,7 +121,7 @@ block contenutoNav
                         .input-group
                             span.input-group-addon
                                 i.fa.fa-phone.fa(aria-hidden='true')
-                            input#telefono.form-control(type='text', placeholder='Telefono')
+                            input#telefono.form-control(type='number', placeholder='Telefono')
             // Malaria e periodo
             .row
                 .col-sm-4.form-group
@@ -145,6 +145,6 @@ block contenutoNav
                             span.glyphicon-calendar.glyphicon
         br
         .container-fluid
-            button.btn.btn-primary.pull-right(onclick='salvaDati();') Submit
+            button.btn.btn-warning.pull-right(onclick='salvaDati();') Salva Anagrafica
 block myScript
     script(src="assets/js/controllers/userController.js")

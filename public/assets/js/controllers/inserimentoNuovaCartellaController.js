@@ -72,6 +72,7 @@ function snapshot() {
 
 function visualizzaCamera(){
     $('#hiddenrow').show();
+	startWebcam();
 }
 
 function render (data) {

@@ -11,7 +11,7 @@ function salvaDati(){
             if(data.errore){
                 alert('DataBase non Esportato')
             }else {
-                alert('DataBase Esportato con successo nella cartella databaseBackup!')
+                alert('DataBase Esportato con successo nella cartella databaseBackup !')
             }
 
         },

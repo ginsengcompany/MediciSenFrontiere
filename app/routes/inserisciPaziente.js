@@ -13,23 +13,29 @@ router.post('/',function (req, res, next) {
     var dataIni = moment(dataInizio).format();
     var dataFine = datiAnagraficaPaziente.fine.date;
     var dataFin = moment(dataFine).format();
+	
+	function replaceAll (search, replacement, string) {
+        var target = string;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
+	
     var queryPostAnagrafica = "INSERT INTO medici_senza_frontiere.tb_anagrafica " +
         "(nome, cognome, sesso, villaggio, distretto, contea, madre, padre, telefono, malaria, malaria_inizio, malaria_fine,surgey_children, st_mary_hospital)" +
         "VALUES (" +
-         "'" + datiAnagraficaPaziente.nome               +"', " +
-         "'" + datiAnagraficaPaziente.cognome            +"', " +
+         "'" + replaceAll("'", "`",datiAnagraficaPaziente.nome)              +"', " +
+         "'" + replaceAll("'", "`",datiAnagraficaPaziente.cognome)            +"', " +
          "'" + datiAnagraficaPaziente.sesso              +"', " +
-         "'" + datiAnagraficaPaziente.villaggio          +"', " +
-         "'" + datiAnagraficaPaziente.distretto          +"', " +
-         "'" + datiAnagraficaPaziente.contea             +"', " +
-         "'" + datiAnagraficaPaziente.madre              +"', " +
-         "'" + datiAnagraficaPaziente.padre              +"', " +
+         "'" + replaceAll("'", "`",datiAnagraficaPaziente.villaggio)          +"', " +
+         "'" + replaceAll("'", "`",datiAnagraficaPaziente.distretto)         +"', " +
+         "'" + replaceAll("'", "`",datiAnagraficaPaziente.contea)             +"', " +
+         "'" + replaceAll("'", "`",datiAnagraficaPaziente.madre)              +"', " +
+         "'" + replaceAll("'", "`",datiAnagraficaPaziente.padre)              +"', " +
          "'" + datiAnagraficaPaziente.telefono           +"', " +
          "'" + datiAnagraficaPaziente.malaria            +"', " +
          "'" + dataIni                                   +"', " +
          "'" + dataFin                                   +"', " +
-         "'" + datiAnagraficaPaziente.surgey_children    +"', " +
-         "'" + datiAnagraficaPaziente.st_mary_hospital   +"')";
+         "'" + replaceAll("'", "`",datiAnagraficaPaziente.surgey_children)    +"', " +
+         "'" + replaceAll("'", "`",datiAnagraficaPaziente.st_mary_hospital)   +"')";
 
        var client = connectionPostgres();
 
@@ -42,8 +48,8 @@ router.post('/',function (req, res, next) {
        query.on("end", function (result) {
            var myOjb = JSON.stringify(result.rows, null, "    ");
            var final = JSON.parse(myOjb);
+		   client.end();
            return res.json(final);
-           client.end();
        });
 
 

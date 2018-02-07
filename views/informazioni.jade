@@ -37,7 +37,12 @@ block contenutoNav
 .div
     block contenuto
         .container-fluid
-            h2.well Informazioni cliniche:
+            h2.well Inserimento Informazioni cliniche
+            .row
+                .col-sm-6
+                    h3 Seleziona Paziente
+                .col-sm-6
+                    h3 Seleziona Cartella Clinica
             .row
                 .col-sm-6
                     .row
@@ -60,6 +65,8 @@ block contenutoNav
                                         th Malaria
                                         th Malaria Inizio
                                         th Malaria Fine
+                
+                .col-sm-6.form-group
                     .row
                         .col-sm-6.form-group#formCartellaClinica
                             label(for='cartellaClinica') Cartella Clinica:
@@ -71,11 +78,15 @@ block contenutoNav
                             .cols-sm-10
                                 select#numeroCartellaClinica.form-control(onchange='changeSelectNumeroCartellaClinica();')
                                     option(value='', selected='selected')
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
+                    .row
+                        .col-sm-12
+                            label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
                     .cols-sm-10
                         img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
-                    .row
+            .row
+                .col-sm-12
+                    h3 Inserisci Dati
+            .row
                         .col-sm-6.form-group
                             label.cols-sm-2.control-label(for='inizioRicovero') Data di ricovero:
                             #datetimepickerInizioRicovero.input-group.date
@@ -105,7 +116,7 @@ block contenutoNav
 
         br
         .container-fluid
-            button.btn.btn-primary.pull-right(type='submit', onclick='salvaDati();') Submit
+            button.btn.btn-warning.pull-right(type='submit', onclick='salvaDati();') Salva Informazioni Cliniche
 
 block myScript
     script(src="assets/js/controllers/informazioniController.js")

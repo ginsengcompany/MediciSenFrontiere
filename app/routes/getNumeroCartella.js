@@ -25,8 +25,8 @@ router.post('/',function (req, res, next) {
     query.on("end", function (result) {
         var myOjb = JSON.stringify(result.rows, null, "    ");
         var final = JSON.parse(myOjb);
+		client.end();
         return res.json(final);
-        client.end();
     });
 });
 

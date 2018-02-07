@@ -40,6 +40,11 @@ block contenutoNav
             h2.well Visualizzazione Cartella Paziente
             .row
                 .col-sm-6
+                    h3 Seleziona Paziente
+                .col-sm-6
+                    h3 Seleziona Cartella Clinica
+            .row
+                .col-sm-6
                     .row
                         .col-sm-12.table-responsive
                             table#tabellaPazienti.table.table-striped.table-bordered(width='100%', cellspacing='0')
@@ -60,6 +65,8 @@ block contenutoNav
                                         th Malaria
                                         th Malaria Inizio
                                         th Malaria Fine
+                
+                .col-sm-6.form-group
                     .row
                         .col-sm-6.form-group#formCartellaClinica
                             label(for='cartellaClinica') Cartella Clinica:
@@ -71,8 +78,9 @@ block contenutoNav
                             .cols-sm-10
                                 select#numeroCartellaClinica.form-control(onchange='changeSelectNumeroCartellaClinica();')
                                     option(value='', selected='selected')
-                .col-sm-6.form-group
-                    label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
+                    .row
+                        .col-sm-12
+                            label.cols-sm-2.control-label(for='fotoProfilo') Foto Paziente
                     .cols-sm-10
                         img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
             h2.well Visualizzazione Informazioni Cliniche

@@ -38,6 +38,11 @@ block contenutoNav
     block contenuto
         .container-fluid
             h2.well Creazione Cartella Clinica e Valutazione Oggettiva
+            .row
+                .col-sm-6
+                    h3 Seleziona Paziente
+                .col-sm-6
+                    h3 Crea Cartella
             // Cartella Clinica e Numero Cartella
             .row
                 .col-sm-6.table-responsive
@@ -90,7 +95,10 @@ block contenutoNav
                                     span.input-group-addon
                                         i.fa.fa-balance-scale.fa(aria-hidden='true')
                                     input#peso.form-control(type='number', placeholder='Peso', min='0', max='200', step='10', value='30')
-                    .row
+            .row
+                .col-sm-12
+                    h3 Carica o scatta foto del paziente
+            .row
                         .col-sm-6.form-group
                             label.cols-sm-2.control-label(for='caricaFoto') Carica Immagine da PC
                             .cols-sm-10
@@ -110,12 +118,10 @@ block contenutoNav
                                 canvas#myCanvas(display='block', width='200%' , height='170%')
                     .row
                         .col-sm-12
-                            a#avviaCam.btn.btn-primary(onclick='startWebcam();', type='button', href='#') Start WebCam
-                            a#arrestaCam.btn.btn-danger(onclick='stopWebcam();', type='button', href='#') Stop WebCam
-                            a#catturaFoto.btn.btn-success(onclick='snapshot();', type='button', href='#') Cattura Immagine
+                            a#catturaFoto.btn.btn-success.btn-block(onclick='snapshot();', type='button', href='#') Cattura Immagine
 
         br
         .container-fluid
-            button.btn.btn-primary.pull-right(onclick='salvaDati();') Submit
+            button.btn.btn-warning.pull-right(onclick='salvaDati();') Salva Cartella Clinicha
 block myScript
     script(src="assets/js/controllers/inserimentoNuovaCartellaController.js")

@@ -13,16 +13,21 @@ router.post('/',function (req, res, next) {
     var dataIni = moment(dataInizio).format();
     var dataFine = datiInformazioniPaziente.data_dimissione.date;
     var dataFin = moment(dataFine).format();
+	
+	function replaceAll (search, replacement, string) {
+        var target = string;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
 
     var queryPostInformazioni = "INSERT INTO medici_senza_frontiere.tb_informazioni_cliniche " +
         "(data_ricovero, data_dimissione, diagnosi, anamnesi, consulenza_chiurugica, consulenza_anestesiologica, id_cartella)" +
         "VALUES (" +
         "'" + dataIni                                              +"', " +
         "'" + dataFin                                              +"', " +
-        "'" + datiInformazioniPaziente.diagnosi                    +"', " +
-        "'" + datiInformazioniPaziente.anamnesi                    +"', " +
-        "'" + datiInformazioniPaziente.consulenza_chiurugica       +"', " +
-        "'" + datiInformazioniPaziente.consulenza_anestesiologica  +"', " +
+        "'" + replaceAll("'", "`",datiInformazioniPaziente.diagnosi)                    +"', " +
+        "'" + replaceAll("'", "`",datiInformazioniPaziente.anamnesi)                    +"', " +
+        "'" + replaceAll("'", "`",datiInformazioniPaziente.consulenza_chiurugica)       +"', " +
+        "'" + replaceAll("'", "`",datiInformazioniPaziente.consulenza_anestesiologica)  +"', " +
         "'" + datiInformazioniPaziente.id_cartella                 +"')";
 
     var client = connectionPostgres();
@@ -36,8 +41,8 @@ router.post('/',function (req, res, next) {
     query.on("end", function (result) {
         var myOjb = JSON.stringify(result.rows, null, "    ");
         var final = JSON.parse(myOjb);
+		client.end();
         return res.json(final);
-        client.end();
     });
 
 

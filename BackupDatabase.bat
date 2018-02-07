@@ -16,4 +16,4 @@
    SET PGPASSWORD=postgres
    echo on
    cd C:\Program Files\PostgreSQL\9.3\bin
-   pg_dump -i -h localhost -p 5432 -U postgres -F c -b -v -f E:\Progetti\MediciSenFrontiere\databaseBackup\%BACKUP_FILE% MediciSenFrontiere
+   pg_dump -i -h localhost -p 5432 -U postgres -F c -b -v -f C:\MediciSenFrontiere\databaseBackup\%BACKUP_FILE% MediciSenFrontiere

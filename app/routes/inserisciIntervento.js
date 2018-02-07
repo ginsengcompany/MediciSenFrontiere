@@ -11,14 +11,19 @@ router.post('/',function (req, res, next) {
     var datiIntervento = req.body;
     var dataInizio = datiIntervento.dataIntervento.date;
     var dataIni = moment(dataInizio).format();
+	
+	function replaceAll (search, replacement, string) {
+        var target = string;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
 
     var queryPostIntervento = "INSERT INTO medici_senza_frontiere.tb_intervento " +
         "(data_intervento, descrizione_intervento, foglio_diario_clinico, complicanze, id_cartella)" +
         "VALUES (" +
         "'" + dataIni                                 +"', " +
-        "'" + datiIntervento.descrizioneIntervento    +"', " +
-        "'" + datiIntervento.foglioDiarioClinico      +"', " +
-        "'" + datiIntervento.complicanze              +"', " +
+        "'" + replaceAll("'", "`",datiIntervento.descrizioneIntervento)   +"', " +
+        "'" + replaceAll("'", "`",datiIntervento.foglioDiarioClinico)      +"', " +
+        "'" + replaceAll("'", "`",datiIntervento.complicanze)             +"', " +
         "'" + datiIntervento.id_cartella                 +"')";
 
     var client = connectionPostgres();
@@ -32,8 +37,8 @@ router.post('/',function (req, res, next) {
     query.on("end", function (result) {
         var myOjb = JSON.stringify(result.rows, null, "    ");
         var final = JSON.parse(myOjb);
+		client.end();
         return res.json(final);
-        client.end();
     });
 
 
