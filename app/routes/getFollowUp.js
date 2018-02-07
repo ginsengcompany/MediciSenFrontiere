@@ -15,7 +15,8 @@ router.post('/',function (req, res, next) {
         "  tb_follow_up.indagini_radiografiche, " +
         "  tb_follow_up.indagini_ematochimiche, " +
         "  tb_follow_up.follow_up, " +
-        "  tb_follow_up.anni_precedenti" +
+        "  tb_follow_up.anni_precedenti," +
+        "  tb_follow_up.data" +
         " FROM " +
         "  medici_senza_frontiere.tb_intervento, " +
         "  medici_senza_frontiere.tb_follow_up" +

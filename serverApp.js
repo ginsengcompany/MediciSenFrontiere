@@ -10,16 +10,6 @@ var now = require('moment');
 //var proxy = new httpProxy.RoutingProxy();
 
 var postgres = require("./config/postgres");
-
-var routes = require('./routes/index');
-var informazioni = require('./routes/informazioni');
-var user = require('./routes/user');
-var inserimentoNuovaCartella = require('./routes/inserimentoNuovaCartella');
-var database = require('./routes/database');
-var dati = require('./routes/dati');
-var intervento = require('./routes/intervento');
-var fotointervento = require('./routes/fotointervento');
-var followup = require('./routes/followup');
 var inserisciPaziente = require('./app/routes/inserisciPaziente');
 var getPaziente = require('./app/routes/getPaziente');
 var getNumeroCartella = require('./app/routes/getNumeroCartella');
@@ -66,14 +56,9 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use('/', routes);
-app.use('/user', user);
-app.use('/dati', dati);
-app.use('/database', database);
-app.use('/informazioni', informazioni);
-app.use('/intervento', intervento);
-app.use('/fotointervento',fotointervento);
-app.use('/followup', followup);
+
+require('./routes/routes.js')(app);
+
 app.use('/salvaAnagrafica',inserisciPaziente);
 app.use('/getDatiPazientePerCartella',getDatiPazientePerCartella);
 app.use('/getNumeroCartella',getNumeroCartella);
@@ -89,7 +74,6 @@ app.use('/inserisciFollowUp',inserisciFollowUp);
 app.use('/getBackup',getBackup);
 app.use('/getInformazioni',getInformazioni);
 app.use('/getFotoIntervento',getFotoIntervento);
-app.use('/inserimentoNuovaCartella',inserimentoNuovaCartella);
 app.use('/getFollowUp',getFollowUp);
 
 

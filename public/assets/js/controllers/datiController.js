@@ -58,6 +58,11 @@ function setTabFollowUp(indiceIntervento) {
             }
         },
         columns: [
+            { "data": "data" , "render": function (data) {
+                function pad(s) { return (s < 10) ? '0' + s : s; }
+                var d = new Date(data);
+                return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+            }},
             { "data": "indagini_ecografiche"},
             { "data": "indagini_radiografiche"},
             { "data": "indagini_ematochimiche"},

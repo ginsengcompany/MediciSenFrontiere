@@ -84,14 +84,18 @@ block contenutoNav
                         img#fotoProfilo.img-responsive(src='', style='width:350px; height:250px; margin: auto; display: none')
             .row
                 .col-sm-12
-                    h3 Scegli Intervento e Scatta Foto		
+                    h3 Scegli Intervento e Carica/Scatta Foto
             .row
-                .col-sm-6.form-group
+                .col-sm-4.form-group
                     label(for='intervento') Intervento:
                     .cols-sm-10
                         select#intervento.form-control(onchange='')
                             option(value='', selected='selected')
-                .col-sm-6.form-group(style='padding-top: 24px')
+                .col-sm-4.form-group
+                    label.cols-sm-2.control-label(for='caricaFoto') Carica Immagine da PC
+                    .cols-sm-10
+                        input#caricaFoto.form-control(type='file', onchange='encodeImageFileAsURL(this)')
+                .col-sm-4.form-group(style='padding-top: 24px')
                     a#avviaCam.btn.btn-primary.btn-block(onclick='startWebcam();', type='button', href='#') Avvia WebCam
             // Foto
             .row

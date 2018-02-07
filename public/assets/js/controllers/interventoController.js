@@ -20,10 +20,10 @@ $(function() {
     $('#datetimepickerDataIntervento').datetimepicker();
 });
 
-function render (data) {
-    var date = new Date(data);
-    var month = date.getMonth() + 1;
-    return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+function convertDate(inputFormat) {
+    function pad(s) { return (s < 10) ? '0' + s : s; }
+    var d = new Date(inputFormat);
+    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
 }
 
 function format ( d ) {
@@ -67,11 +67,11 @@ function format ( d ) {
         '</tr>'+
         '<tr>'+
         '<td>Data Inizio Malaria:</td>'+
-        '<td>'+render(d.malaria_inizio)+'</td>'+
+        '<td>'+convertDate(d.malaria_inizio)+'</td>'+
         '</tr>'+
         '<tr>'+
         '<td>Data Fine Malaria:</td>'+
-        '<td>'+render(d.malaria_fine)+'</td>'+
+        '<td>'+convertDate(d.malaria_fine)+'</td>'+
         '</tr>'+
         '</table>';
 }

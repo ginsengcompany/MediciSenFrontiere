@@ -22,14 +22,15 @@ router.post('/',function (req, res, next) {
     };
 
     var queryPostIntervento = "INSERT INTO medici_senza_frontiere.tb_follow_up " +
-        "(id_intervento, indagini_radiografiche, indagini_ecografiche, indagini_ematochimiche, follow_up, anni_precedenti)" +
+        "(id_intervento, indagini_radiografiche, indagini_ecografiche, indagini_ematochimiche, follow_up, anni_precedenti, data)" +
         "VALUES (" +
         "'" + id_intervento         +"', " +
         "'" + replaceAll("'", "`",indagini_radiografiche)         +"', " +
         "'" + replaceAll("'", "`",indagini_ecografiche)         +"', " +
         "'" + replaceAll("'", "`",indegini_ematochimiche)           +"', " +
         "'" + replaceAll("'", "`",follow_up)         +"', " +
-        "'" + replaceAll("'", "`",anni_precedenti)       +"')";
+        "'" + replaceAll("'", "`",anni_precedenti)         +"', " +
+        "'" +    moment().format()      +"')";
 
     var client = connectionPostgres();
 
