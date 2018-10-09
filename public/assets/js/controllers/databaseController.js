@@ -21,3 +21,20 @@ function salvaDati(){
 
 
 }
+
+function esportaDati(){
+
+    $.ajax({
+        url: '/exportXls',
+        type: 'GET',
+        cache: false,
+        contentType: 'application/json',
+        success: function(data) {
+            alert('DataBase Esportato con successo nella cartella databaseBackup !')
+        },
+        faliure: function(data) {
+        }
+    });
+
+
+}
