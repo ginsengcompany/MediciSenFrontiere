@@ -292,3 +292,41 @@ function salvaCartella() {
 function salvaDati(){
     salvaCartella();
 }
+
+$(function() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = today.getMonth()+1; //January is 0!
+    var valueMonth=yyyy+'-'+mm;
+    $('#searchcartellaClinica').val(valueMonth);
+});
+
+function searchTable(){
+
+    var datiSearch = {
+        "cartella": "",
+        "numero_cartella": ""
+    };
+
+    if(($('#searchcartellaClinica').val() !== '' || $('#searchcartellaClinica').val() !== null) && ($('#searchnumeroCartella').val() !== '' || $('#searchnumeroCartella').val() !== null)){
+
+        datiSearch.cartella = $('#searchcartellaClinica').val();
+        datiSearch.numero_cartella = $('#searchnumeroCartella').val();
+
+        $.ajax({
+            url: '/searchTable',
+            type: 'POST',
+            data: JSON.stringify(datiSearch),
+            contentType: 'application/json',
+            success: function(data) {
+                console.log(data[0]);
+                tabPazienti.search( data[0].cognome +" "+ data[0].nome).draw();
+            },
+            faliure: function(data) {
+
+            }
+        });
+
+    }
+
+}

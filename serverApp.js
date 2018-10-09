@@ -23,6 +23,7 @@ var getBackup = require('./app/routes/getBackup');
 var getInformazioni = require('./app/routes/getInformazioni');
 var getFotoIntervento = require ('./app/routes/getFotoIntervento');
 var getFollowUp = require('./app/routes/getFollowUp');
+var searchTable = require('./app/routes/searchTable');
 
 var app = express();
 var con = postgres(app);
@@ -61,6 +62,7 @@ app.use('/getBackup',getBackup);
 app.use('/getInformazioni',getInformazioni);
 app.use('/getFotoIntervento',getFotoIntervento);
 app.use('/getFollowUp',getFollowUp);
+app.use('/searchTable',searchTable);
 
 
 // catch 404 and forward to error handler

@@ -39,6 +39,24 @@ block contenutoNav
         .container-fluid
             h2.well Visualizzazione Cartella Paziente
             .row
+                .col-sm-12
+                    h3 Ricerca per Cartella Clinica
+            .row
+                .col-sm-6.form-group
+                    label.cols-sm-2.control-label(for='searchcartellaClinica') Cartella Clinica
+                    .cols-sm-10
+                        .input-group
+                            span.input-group-addon
+                                i.fa.fa-folder-open-o.fa(aria-hidden='true')
+                            input#searchcartellaClinica.form-control(type='month', placeholder='Cartella Clinica', min='2000-01-02')
+                .col-sm-6.form-group
+                    label.cols-sm-2.control-label(for='searchnumeroCartella') Numero
+                    .cols-sm-10
+                        .input-group
+                            span.input-group-addon
+                                i.fa.fa-sitemap.fa(aria-hidden='true')
+                            input#searchnumeroCartella.form-control(type='number', placeholder='Numero', min='0', step='1', value='0', onchange='searchTable()')
+            .row
                 .col-sm-6
                     h3 Seleziona Paziente
                 .col-sm-6
