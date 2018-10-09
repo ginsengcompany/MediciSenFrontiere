@@ -21,12 +21,21 @@ var idCartella = {
 $(function() {
     $('#inizioRicovero').datetimepicker();
     $('#fineRicovero').datetimepicker();
+    $('#inizioRicovero').data("DateTimePicker").clear();
+    $('#fineRicovero').data("DateTimePicker").clear();
 });
 
 function convertDate(inputFormat) {
-    function pad(s) { return (s < 10) ? '0' + s : s; }
-    var d = new Date(inputFormat);
-    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    if(inputFormat !== null){
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    }
+    else{
+        var label = "-";
+        return label;
+    }
+
 }
 
 function format ( d ) {
@@ -229,6 +238,9 @@ function changeSelectCartellaClinica() {
 function changeSelectNumeroCartellaClinica() {
     indiceCartella = JSON.parse($('#cartellaClinica').val());
     document.getElementById('fotoProfilo').style.display = 'block';
+    document.getElementById('datiInsert').style.display = 'block';
+    document.getElementById('datiInsert1').style.display = 'block';
+    document.getElementById('datiInsert2').style.display = 'block';
     document.getElementById('fotoProfilo').src = indiceCartella.foto_paziente.replace(/"/g, '');
 }
 
@@ -245,14 +257,7 @@ function salvaDati(){
     {
         alert('Non hai selezionato un paziente!');
     }
-    else if (
-        (datiInformazioni.data_ricovero              === '' ||  datiInformazioni.data_ricovero              === "" || datiInformazioni.data_ricovero              === undefined)||
-        (datiInformazioni.data_dimissione            === '' ||  datiInformazioni.data_dimissione            === "" || datiInformazioni.data_dimissione            === undefined)||
-        (datiInformazioni.diagnosi                   === '' ||  datiInformazioni.diagnosi                   === "" || datiInformazioni.diagnosi                   === undefined)||
-        (datiInformazioni.anamnesi                   === '' ||  datiInformazioni.anamnesi                   === "" || datiInformazioni.anamnesi                   === undefined)||
-        (datiInformazioni.consulenza_chiurugica      === '' ||  datiInformazioni.consulenza_chiurugica      === "" || datiInformazioni.consulenza_chiurugica      === undefined)||
-        (datiInformazioni.consulenza_anestesiologica === '' ||  datiInformazioni.consulenza_anestesiologica === "" || datiInformazioni.consulenza_anestesiologica === undefined)
-    )
+    else if (datiInformazioni.data_ricovero.date === '' ||  datiInformazioni.data_ricovero.date === "" || datiInformazioni.data_ricovero.date === undefined)
     {
         alert('Inserire tutti i CAMPI!');
     }

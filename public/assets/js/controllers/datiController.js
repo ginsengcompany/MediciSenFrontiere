@@ -30,9 +30,15 @@ function setTabInformazioni(indiceCartella) {
                 return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
             }},
             { "data": "data_dimissione" , "render": function (data) {
-                function pad(s) { return (s < 10) ? '0' + s : s; }
-                var d = new Date(data);
-                return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+                if(data !== null){
+                    var date = new Date(data);
+                    var month = date.getMonth() + 1;
+                    return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+                }
+                else{
+                    var label = "-";
+                    return label;
+                }
             }},
             { "data": "diagnosi"},
             { "data": "anamnesi"},
@@ -59,9 +65,15 @@ function setTabFollowUp(indiceIntervento) {
         },
         columns: [
             { "data": "data" , "render": function (data) {
-                function pad(s) { return (s < 10) ? '0' + s : s; }
-                var d = new Date(data);
-                return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+                if(data !== null){
+                    var date = new Date(data);
+                    var month = date.getMonth() + 1;
+                    return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+                }
+                else{
+                    var label = "-";
+                    return label;
+                }
             }},
             { "data": "indagini_ecografiche"},
             { "data": "indagini_radiografiche"},
@@ -74,9 +86,16 @@ function setTabFollowUp(indiceIntervento) {
 }
 
 function convertDate(inputFormat) {
-    function pad(s) { return (s < 10) ? '0' + s : s; }
-    var d = new Date(inputFormat);
-    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    if(inputFormat !== null){
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    }
+    else{
+        var label = "-";
+        return label;
+    }
+
 }
 
 function format ( d ) {

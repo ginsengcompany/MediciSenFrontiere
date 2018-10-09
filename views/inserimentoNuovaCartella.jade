@@ -82,19 +82,28 @@ block contenutoNav
                                     input#numeroCartella.form-control(type='number', placeholder='Numero', min='0', step='1', value='0')
                     .row
                         .col-sm-6.form-group
-                            label.cols-sm-2.control-label(for='anni') Anni
+                            label(for='tipoEta') Tipo Età:
+                            .cols-sm-10
+                                select#tipoEta.form-control()
+                                    option
+                                    option Anni
+                                    option Mesi
+                                    option Settimane
+                        .col-sm-6.form-group
+                            label.cols-sm-2.control-label(for='anni') Equivalente Età
                             .cols-sm-10
                                 .input-group
                                     span.input-group-addon
                                         i.fa.fa-calendar.fa(aria-hidden='true')
                                     input#anni.form-control(type='number', placeholder='Anni', min='0', max='120', step='1', value='0')
+                    .row
                         .col-sm-6.form-group
                             label.cols-sm-2.control-label(for='peso') Peso (in kg)
                             .cols-sm-10
                                 .input-group
                                     span.input-group-addon
                                         i.fa.fa-balance-scale.fa(aria-hidden='true')
-                                    input#peso.form-control(type='number', placeholder='Peso', min='0', max='200', step='10', value='30')
+                                    input#peso.form-control(type='number', placeholder='Peso', min='0', max='200', step='1', value='30')
             .row
                 .col-sm-12
                     h3 Carica o scatta foto del paziente

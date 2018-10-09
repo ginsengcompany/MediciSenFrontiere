@@ -7,7 +7,8 @@ var datiCartella = {
     'anni' : undefined,
     'peso' : undefined,
     'numero_cartella' : undefined,
-    'cartella': undefined
+    'cartella': undefined,
+    'tipo': undefined
 };
 
 $(function() {
@@ -76,9 +77,16 @@ function visualizzaCamera(){
 }
 
 function convertDate(inputFormat) {
-    function pad(s) { return (s < 10) ? '0' + s : s; }
-    var d = new Date(inputFormat);
-    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    if(inputFormat !== null){
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    }
+    else{
+        var label = "-";
+        return label;
+    }
+
 }
 
 function format ( d ) {
@@ -160,14 +168,27 @@ $(document).ready(function() {
             { "data": "telefono", "visible": false },
             { "data": "malaria", "visible": false },
             { "data": "malaria_inizio" , "render": function (data) {
-                var date = new Date(data);
-                var month = date.getMonth() + 1;
-                return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+                if(data !== null){
+                    var date = new Date(data);
+                    var month = date.getMonth() + 1;
+                    return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+                }
+                else{
+                    var label = "-";
+                    return label;
+                }
+
             }, "visible": false},
             { "data": "malaria_fine" , "render": function (data) {
-                var date = new Date(data);
-                var month = date.getMonth() + 1;
-                return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+                if(data !== null){
+                    var date = new Date(data);
+                    var month = date.getMonth() + 1;
+                    return date.getDate() + "/" + (month.length < 10 ? "0" + month : month) + "/" + date.getFullYear();
+                }
+                else{
+                    var label = "-";
+                    return label;
+                }
             }, "visible": false}
         ]
     } );
@@ -225,6 +246,7 @@ function salvaCartella() {
     datiCartella.anni = $('#anni').val();
     datiCartella.cartella = $('#cartellaClinica').val();
     datiCartella.numero_cartella = $('#numeroCartella').val();
+    datiCartella.tipo = $('#tipoEta').val();
 
     if(arrayPaziente.length<0)
     {
@@ -234,6 +256,7 @@ function salvaCartella() {
         (datiCartella.peso === '' || datiCartella.peso === "" || datiCartella.peso === undefined) ||
         (datiCartella.anni === '' || datiCartella.anni === "" || datiCartella.anni === undefined) ||
         (datiCartella.cartella === '' || datiCartella.cartella === "" || datiCartella.cartella === undefined) ||
+        (datiCartella.tipo === '' || datiCartella.tipo === "" || datiCartella.tipo === undefined) ||
         (datiCartella.numero_cartella === '' || datiCartella.numero_cartella === "" || datiCartella.numero_cartella === undefined)
     )
     {
@@ -256,6 +279,7 @@ function salvaCartella() {
                     $('#peso').val('');
                     $('#cartellaClinica').val('');
                     $('#numeroCartella').val('');
+                    $('#tipoEta').val('');
                     $('#hiddenrow').hide();
                     },
                 faliure: function (data) {

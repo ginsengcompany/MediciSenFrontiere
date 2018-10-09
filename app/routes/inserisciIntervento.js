@@ -7,15 +7,15 @@ var connectionPostgres = function () {
     return postgresConnection();
 };
 
+function replaceAll (search, replacement, string) {
+    var target = string;
+    return target.replace(new RegExp(search, 'g'), replacement);
+}
+
 router.post('/',function (req, res, next) {
     var datiIntervento = req.body;
     var dataInizio = datiIntervento.dataIntervento.date;
     var dataIni = moment(dataInizio).format();
-	
-	function replaceAll (search, replacement, string) {
-        var target = string;
-        return target.replace(new RegExp(search, 'g'), replacement);
-    };
 
     var queryPostIntervento = "INSERT INTO medici_senza_frontiere.tb_intervento " +
         "(data_intervento, descrizione_intervento, foglio_diario_clinico, complicanze, id_cartella)" +

@@ -21,9 +21,16 @@ $(function() {
 });
 
 function convertDate(inputFormat) {
-    function pad(s) { return (s < 10) ? '0' + s : s; }
-    var d = new Date(inputFormat);
-    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    if(inputFormat !== null){
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    }
+    else{
+        var label = "-";
+        return label;
+    }
+
 }
 
 function format ( d ) {
@@ -226,6 +233,8 @@ function changeSelectCartellaClinica() {
 function changeSelectNumeroCartellaClinica() {
     indiceCartella = JSON.parse($('#cartellaClinica').val());
     document.getElementById('fotoProfilo').style.display = 'block';
+    document.getElementById('datiInsert').style.display = 'block';
+    document.getElementById('datiInsert1').style.display = 'block';
     document.getElementById('fotoProfilo').src = indiceCartella.foto_paziente.replace(/"/g, '');
 }
 
@@ -238,12 +247,8 @@ function salvaDati() {
 
     if (indicePazienteJSON === '' || indicePazienteJSON === "" || indicePazienteJSON === undefined) {
         alert('Non hai selezionato un paziente!');
-    } else if (
-        (datiIntervento.dataIntervento === '' || datiIntervento.dataIntervento === "" || datiIntervento.dataIntervento === undefined) ||
-        (datiIntervento.descrizioneIntervento === '' || datiIntervento.descrizioneIntervento === "" || datiIntervento.descrizioneIntervento === undefined) ||
-        (datiIntervento.foglioDiarioClinico === '' || datiIntervento.foglioDiarioClinico === "" || datiIntervento.foglioDiarioClinico === undefined) ||
-        (datiIntervento.complicanze === '' || datiIntervento.complicanze === "" || datiIntervento.complicanze === undefined)
-    ) {
+    } else if (datiIntervento.dataIntervento.date === '' || datiIntervento.dataIntervento.date === "" || datiIntervento.dataIntervento.date === undefined)
+    {
         alert('Inserire tutti i CAMPI!');
     }
     else {

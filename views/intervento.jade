@@ -86,7 +86,7 @@ block contenutoNav
                 .row
                 .col-sm-12
                     h3 Inserisci Dati
-                .row
+                .row#datiInsert(style='display: none')
                         .col-sm-6.form-group
                             label.cols-sm-2.control-label(for='dataIntervento') Data intervento:
                             #datetimepickerDataIntervento.input-group.date
@@ -96,7 +96,7 @@ block contenutoNav
                         .col-sm-6.form-group
                             label.cols-sm-2.control-label(for='descrizioneIntervento') Descrizione intervento (max 500 caratteri):
                             textarea#descrizioneIntervento.form-control(rows='1', maxlength='500')
-                    .row
+                    .row#datiInsert1(style='display: none')
                         .col-sm-6.form-group
                             label.cols-sm-2.control-label(for='foglioDiarioClinico') Foglio Diario Clinico (max 500 caratteri):
                             textarea#foglioDiarioClinico.form-control(rows='1', maxlength='500')

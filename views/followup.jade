@@ -86,16 +86,16 @@ block contenutoNav
             .row
                 .col-sm-6
                     h3 Seleziona Intervento per Follow Up
-            .row
+            .row#datiInsert(style='display: none')
                 .col-sm-12.form-group
                     label(for='intervento') Intervento:
                     .cols-sm-10
                         select#intervento.form-control(onchange='')
                             option(value='', selected='selected')
-            .row
+            .row#datiInsert1(style='display: none')
                 .col-sm-6
                     h3 Inserisci Dati
-            .row
+            .row#datiInsert2(style='display: none')
                 .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='indaginiRadiografiche') Indagini radiografiche (max 500 caratteri):
                     textarea#indaginiRadiografiche.form-control(rows='1', maxlength='500')
@@ -106,7 +106,7 @@ block contenutoNav
                     label.cols-sm-2.control-label(for='indaginiEmatochimiche') Indagini ematochimiche (max 500 caratteri):
                     textarea#indaginiEmatochimiche.form-control(rows='1', maxlength='500')
             // Indagini radiografiche ecografiche ed ematochimihce
-            .row
+            .row#datiInsert3(style='display: none')
                 .col-sm-4.form-group
                     label.cols-sm-2.control-label(for='followUp') Follow Up (max 500 caratteri):
                     textarea#followUp.form-control(rows='1', maxlength='500')

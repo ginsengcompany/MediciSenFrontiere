@@ -20,9 +20,16 @@ var idCartella = {
 };
 
 function convertDate(inputFormat) {
-    function pad(s) { return (s < 10) ? '0' + s : s; }
-    var d = new Date(inputFormat);
-    return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    if(inputFormat !== null){
+        function pad(s) { return (s < 10) ? '0' + s : s; }
+        var d = new Date(inputFormat);
+        return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+    }
+    else{
+        var label = "-";
+        return label;
+    }
+
 }
 
 function format ( d ) {
@@ -225,6 +232,10 @@ function changeSelectCartellaClinica() {
 function changeSelectNumeroCartellaClinica() {
     indiceCartella = JSON.parse($('#cartellaClinica').val());
     document.getElementById('fotoProfilo').style.display = 'block';
+    document.getElementById('datiInsert').style.display = 'block';
+    document.getElementById('datiInsert1').style.display = 'block';
+    document.getElementById('datiInsert2').style.display = 'block';
+    document.getElementById('datiInsert3').style.display = 'block';
     document.getElementById('fotoProfilo').src = indiceCartella.foto_paziente.replace(/"/g, '');
     document.getElementById("intervento").options.length = 0;
     datiIntervento.username = arrayPaziente[0]._id;
@@ -276,14 +287,7 @@ function salvaDati(){
     {
         alert('Non hai selezionato un paziente!');
     }
-    else if (
-        (datiFollowup.id_intervento          === '' || datiFollowup.id_intervento          === "" || datiFollowup.id_intervento          === undefined)||
-        (datiFollowup.indagini_radiografiche === '' || datiFollowup.indagini_radiografiche === "" || datiFollowup.indagini_radiografiche === undefined)||
-        (datiFollowup.indagini_ecografiche   === '' || datiFollowup.indagini_ecografiche   === "" || datiFollowup.indagini_ecografiche   === undefined)||
-        (datiFollowup.indegini_ematochimiche === '' || datiFollowup.indegini_ematochimiche === "" || datiFollowup.indegini_ematochimiche === undefined)||
-        (datiFollowup.follow_up              === '' || datiFollowup.follow_up              === "" || datiFollowup.follow_up              === undefined)||
-        (datiFollowup.anni_precedenti        === '' || datiFollowup.anni_precedenti        === "" || datiFollowup.anni_precedenti        === undefined)
-    ){
+    else if (datiFollowup.id_intervento          === '' || datiFollowup.id_intervento          === "" || datiFollowup.id_intervento          === undefined){
         alert('Inserire tutti i CAMPI!');
     } else {
 

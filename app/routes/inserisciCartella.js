@@ -12,8 +12,8 @@ router.post('/',function (req, res, next) {
     client = connectionPostgres();
 
     var queryPostCartellaEsistente = "SELECT * FROM medici_senza_frontiere.tb_cartella_clinica WHERE id_paziente="+datiCartella.id_paziente+
-                                     " AND cartella='"+datiCartella.cartella+"' AND"+
-                                     " numero_cartella='"+datiCartella.numero_cartella+"'";
+        " AND cartella='"+datiCartella.cartella+"' AND"+
+        " numero_cartella='"+datiCartella.numero_cartella+"'";
 
     const query = client.query(queryPostCartellaEsistente);
 
@@ -30,13 +30,14 @@ router.post('/',function (req, res, next) {
         else if(final.length===0){
 
             var queryPostCartella = "INSERT INTO medici_senza_frontiere.tb_cartella_clinica " +
-                "(anni, peso, numero_cartella, cartella, id_paziente, foto_paziente)" +
+                "(anni, peso, numero_cartella, cartella, id_paziente, tipo, foto_paziente)" +
                 "VALUES (" +
                 "'" + datiCartella.anni               +"', " +
                 "'" + datiCartella.peso               +"', " +
                 "'" + datiCartella.numero_cartella    +"', " +
                 "'" + datiCartella.cartella           +"', " +
                 "'" + datiCartella.id_paziente        +"', " +
+                "'" + datiCartella.tipo        +"', " +
                 "'" + datiCartella.foto_paziente      +"')";
 
 
@@ -50,7 +51,7 @@ router.post('/',function (req, res, next) {
             query1.on("end", function (result) {
                 var myOjb = JSON.stringify(result.rows, null, "    ");
                 var final = JSON.parse(myOjb);
-				client.end();
+                client.end();
                 return res.json(final);
             });
 

@@ -22,7 +22,7 @@ router.get('/',function (req, res, next) {
         var jsonFinale = {
             "data": final
         };
-		client.end();
+        client.end();
         return res.json(jsonFinale);
     });
 });

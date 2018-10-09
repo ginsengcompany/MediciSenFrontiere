@@ -15,13 +15,9 @@ var datiAnagrafica = {
     'st_mary_hospital' : undefined
 };
 
-document.getElementById('fine').disabled = true;
-document.getElementById("inizio").disabled = true;
-
 $(function() {
     $('#datetimepicker1').datetimepicker();
     $('#datetimepicker2').datetimepicker();
-    $('#hiddenrow').hide();
 });
 
 function salvaAnagrafica() {
@@ -83,25 +79,11 @@ function salvaAnagrafica() {
                 $('#malaria').val('');
                 $('#surgeyChildren').val('');
                 $('#stMaryHospital').val('');
-                $('#hiddenrow').hide();
             },
             faliure: function (data) {
                 alert('Errore di salvataggio. Riprovare.');
             }
         });
-    }
-}
-
-function changeSelectMalaria() {
-    if ($('#malaria').val() === 'Si')
-    {
-        document.getElementById("fine").disabled = false;
-        document.getElementById("inizio").disabled = false;
-    }
-    else
-    {
-        document.getElementById('fine').disabled = true;
-        document.getElementById("inizio").disabled = true;
     }
 }
 

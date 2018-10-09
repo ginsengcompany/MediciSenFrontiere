@@ -7,28 +7,54 @@ var connectionPostgres = function () {
     return postgresConnection();
 };
 
+function replaceAll (search, replacement, string) {
+    var target = string;
+    return target.replace(new RegExp(search, 'g'), replacement);
+}
+
 router.post('/',function (req, res, next) {
     var datiInformazioniPaziente = req.body;
     var dataInizio = datiInformazioniPaziente.data_ricovero.date;
-    var dataIni = moment(dataInizio).format();
     var dataFine = datiInformazioniPaziente.data_dimissione.date;
-    var dataFin = moment(dataFine).format();
-	
-	function replaceAll (search, replacement, string) {
-        var target = string;
-        return target.replace(new RegExp(search, 'g'), replacement);
-    };
 
-    var queryPostInformazioni = "INSERT INTO medici_senza_frontiere.tb_informazioni_cliniche " +
-        "(data_ricovero, data_dimissione, diagnosi, anamnesi, consulenza_chiurugica, consulenza_anestesiologica, id_cartella)" +
-        "VALUES (" +
-        "'" + dataIni                                              +"', " +
-        "'" + dataFin                                              +"', " +
-        "'" + replaceAll("'", "`",datiInformazioniPaziente.diagnosi)                    +"', " +
-        "'" + replaceAll("'", "`",datiInformazioniPaziente.anamnesi)                    +"', " +
-        "'" + replaceAll("'", "`",datiInformazioniPaziente.consulenza_chiurugica)       +"', " +
-        "'" + replaceAll("'", "`",datiInformazioniPaziente.consulenza_anestesiologica)  +"', " +
-        "'" + datiInformazioniPaziente.id_cartella                 +"')";
+    var dataIni = '';
+    var dataFin = '';
+
+    var queryPostInformazioni = '';
+
+    if(dataInizio !== undefined && dataFine !== undefined && dataInizio !== "" && dataFine !== ""){
+        dataIni = moment(dataInizio).format();
+
+        dataFin = moment(dataFine).format();
+
+        queryPostInformazioni = "INSERT INTO medici_senza_frontiere.tb_informazioni_cliniche " +
+            "(data_ricovero, data_dimissione, diagnosi, anamnesi, consulenza_chiurugica, consulenza_anestesiologica, id_cartella)" +
+            "VALUES (" +
+            "'" + dataIni                                              +"', " +
+            "'" + dataFin                                              +"', " +
+            "'" + replaceAll("'", "`",datiInformazioniPaziente.diagnosi)                    +"', " +
+            "'" + replaceAll("'", "`",datiInformazioniPaziente.anamnesi)                    +"', " +
+            "'" + replaceAll("'", "`",datiInformazioniPaziente.consulenza_chiurugica)       +"', " +
+            "'" + replaceAll("'", "`",datiInformazioniPaziente.consulenza_anestesiologica)  +"', " +
+            "'" + datiInformazioniPaziente.id_cartella                 +"')";
+
+
+    }
+    else if(dataInizio !== undefined || dataInizio !== ""){
+
+        dataIni = moment(dataInizio).format();
+
+        queryPostInformazioni = "INSERT INTO medici_senza_frontiere.tb_informazioni_cliniche " +
+            "(data_ricovero, diagnosi, anamnesi, consulenza_chiurugica, consulenza_anestesiologica, id_cartella)" +
+            "VALUES (" +
+            "'" + dataIni                                              +"', " +
+            "'" + replaceAll("'", "`",datiInformazioniPaziente.diagnosi)                    +"', " +
+            "'" + replaceAll("'", "`",datiInformazioniPaziente.anamnesi)                    +"', " +
+            "'" + replaceAll("'", "`",datiInformazioniPaziente.consulenza_chiurugica)       +"', " +
+            "'" + replaceAll("'", "`",datiInformazioniPaziente.consulenza_anestesiologica)  +"', " +
+            "'" + datiInformazioniPaziente.id_cartella                 +"')";
+
+    }
 
     var client = connectionPostgres();
 

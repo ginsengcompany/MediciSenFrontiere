@@ -86,7 +86,7 @@ block contenutoNav
             .row
                 .col-sm-12
                     h3 Inserisci Dati
-            .row
+            .row#datiInsert(style='display: none')
                         .col-sm-6.form-group
                             label.cols-sm-2.control-label(for='inizioRicovero') Data di ricovero:
                             #datetimepickerInizioRicovero.input-group.date
@@ -99,14 +99,14 @@ block contenutoNav
                                 input#fineRicovero.form-control(type='text')
                                 span.input-group-addon
                                     span.glyphicon-calendar.glyphicon
-                    .row
+                    .row#datiInsert1(style='display: none')
                         .col-sm-6.form-group
                             label.cols-sm-2.control-label(for='diagnosi') Diagnosi (max 500 caratteri):
                             textarea#diagnosi.form-control(rows='1', maxlength='500')
                         .col-sm-6.form-group
                             label.cols-sm-2.control-label(for='anamnesi') Anamnesi (max 500 caratteri):
                             textarea#anamnesi.form-control(rows='1', maxlength='500')
-                    .row
+                    .row#datiInsert2(style='display: none')
                         .col-sm-6.form-group
                             label.cols-sm-2.control-label(for='consulenzaChirurgica') Consulenza chirurgica (max 500 caratteri):
                             textarea#consulenzaChirurgica.form-control(rows='1', maxlength='500')

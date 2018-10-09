@@ -4,10 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var httpProxy = require('http-proxy');
-var now = require('moment');
 
-//var proxy = new httpProxy.RoutingProxy();
 
 var postgres = require("./config/postgres");
 var inserisciPaziente = require('./app/routes/inserisciPaziente');
@@ -34,8 +31,6 @@ var con = postgres(app);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(favicon(path.join(__dirname,'public/assets/img','favicon.ico')));
 
 app.use(logger('dev'));
@@ -44,15 +39,6 @@ app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-
-//
-//app.all('/server/*', function (req, res) {
-//
-//    var forwardPath = '/';
-//    req.url = forwardPath + req.url.split('/').slice(2).join('/'); // rimuove '/webhospital/';
-//    var proxyOptions = {host: 'localhost', port: 3009};
-//    return proxy.proxyRequest(req, res, proxyOptions);
-//});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
